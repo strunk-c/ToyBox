@@ -27,12 +27,12 @@
 
 ## その他
 
-プログラミングを学び始めて最初に作ったものは [インテックスヘアー（美容室サイト）](https://.com) です。<br>
-[ぴえんすいじゃく](https://.com) や [玉子物語](https://.com) は ゲームで、そのほかにもあります。<br>
+プログラミングを学び始めて最初に作ったものは [インテックスヘアー（美容室サイト）](https://strunk-c.github.io/ToyBox/salon.html) です。<br>
+[ぴえんすいじゃく](https://strunk-c.github.io/ToyBox/memory.html) や [玉子物語](https://strunk-c.github.io/ToyBox/tmkStory.html) は ゲームで、そのほかにもあります。<br>
 もしよろしければ見ていただけますと幸いです。
 
 <br>
 
 ## URL
 
-[Toy Box](https://.com "Go to the PUT !")
+[Toy Box](https://strunk-c.github.io/ToyBox/index.html "Go to the PUT !")
