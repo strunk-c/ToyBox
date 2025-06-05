@@ -1,0 +1,679 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&family=Yuji+Mai&display=swap');
+
+html {
+    overflow: auto;
+}
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: serif;
+    color: #000;
+    background-color: #fff;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.logo {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#screen {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    margin: auto;
+    background-color: #000;
+    overflow: hidden;
+}
+
+#bgImg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+}
+
+#dialog {
+    text-align: center;
+}
+
+#warning {
+    background-color: red;
+    margin: -16px -16px 0;
+    font-size: large;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+a.yesButton {
+    display: flex;
+    vertical-align: middle;
+    text-decoration: none;
+    margin: auto;
+    width: 20em;
+    height: 4em;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.85s cubic-bezier(.17, .67, .14, .93);
+    transform-style: preserve-3d;
+    transform-origin: 100% 50%;
+    margin-bottom: 10px;
+}
+
+a.yesButton:hover {
+    transform: rotateX(-90deg);
+}
+
+a.yesButton .side {
+    box-sizing: border-box;
+    position: absolute;
+    display: inline-block;
+    width: 20em;
+    text-align: center;
+    padding: 1.2rem 4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+a.yesButton .top {
+    background: #00a1e9;
+    color: #fff;
+    transform: rotateX(90deg) translate3d(0, 0, 2em);
+}
+
+a.yesButton .front {
+    background: #3f3f3f;
+    color: #fff;
+    transform: translate3d(0, 0, 2em);
+}
+
+a.noButton {
+    display: flex;
+    vertical-align: middle;
+    text-decoration: none;
+    margin: auto;
+    width: 20em;
+    height: 4em;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.85s cubic-bezier(.17, .67, .14, .93);
+    transform-style: preserve-3d;
+    transform-origin: 100% 50%;
+}
+
+a.noButton:hover {
+    transform: rotateX(-90deg);
+}
+
+a.noButton .side {
+    box-sizing: border-box;
+    position: absolute;
+    display: inline-block;
+    width: 20em;
+    text-align: center;
+    padding: 1.2rem 4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+a.noButton .top {
+    background: #e4007f;
+    color: #fff;
+    transform: rotateX(90deg) translate3d(0, 0, 2em);
+}
+
+a.noButton .front {
+    background: #3f3f3f;
+    color: #fff;
+    transform: translate3d(0, 0, 2em);
+}
+
+#titleText,
+#titleClick {
+    font-family: "New Tegomin", serif;
+    font-size: xx-large;
+    font-weight: 300;
+    text-align: center;
+    padding: 30px 0;
+    display: none;
+}
+
+span {
+    color: transparent;
+    animation: blur 3s ease-out 1;
+}
+
+span:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+span:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+span:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+span:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+span:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+@keyframes blur {
+    0% {
+        text-shadow: 0 0 100px #fff;
+        opacity: 0;
+    }
+
+    5% {
+        text-shadow: 0 0 90px #fff;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    20% {
+        text-shadow: 0 0 0px #fff;
+    }
+
+    80% {
+        text-shadow: 0 0 0px #fff;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    95% {
+        text-shadow: 0 0 90px #fff;
+    }
+
+    100% {
+        text-shadow: 0 0 100px #fff;
+        opacity: 0;
+    }
+}
+
+.itemBox {
+    position: absolute;
+    width: 640px;
+    height: 400px;
+    top: 96px;
+    left: 320px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.characterPosition {
+    position: absolute;
+    width: 360px;
+    height: 720px;
+    top: 64px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 3;
+}
+
+#characterPosition1 {
+    /*一人・三人表示(中央)*/
+    left: 460px;
+}
+
+#characterPosition2 {
+    /*二人表示(左)*/
+    left: 160px;
+}
+
+#characterPosition3 {
+    /*二人表示(右)*/
+    left: 760px;
+}
+
+#characterPosition4 {
+    /*三人表示(左)*/
+    left: 40px;
+}
+
+#characterPosition5 {
+    /*三人表示(右)*/
+    left: 880px;
+}
+
+#textArea {
+    position: absolute;
+    opacity: 0.8;
+    width: 1120px;
+    height: 160px;
+    top: 480px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    background-color: #080808;
+    border: double 10px #fff;
+    z-index: 3;
+}
+
+#textBox {
+    width: 960px;
+    height: 136px;
+    margin: -8px auto;
+    cursor: pointer;
+}
+
+#text {
+    color: #fff;
+    font-size: 1.6rem;
+    font-family: serif;
+}
+
+.selectBox {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .5);
+    display: none;
+}
+
+.select {
+    position: absolute;
+    width: 400px;
+    height: 80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #000;
+    border: solid 5px #fff;
+    border-radius: 20px 50px;
+    box-shadow: inset -2px -2px 4px 4px rgba(0, 0, 0, .5), 2px 2px 4px 4px rgba(0, 0, 0, .5);
+}
+
+#select1 {
+    top: 80px;
+}
+
+#select2 {
+    top: 200px;
+}
+
+#select3 {
+    top: 320px;
+}
+
+.selectText {
+    margin: auto;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+    z-index: 10;
+}
+
+.none {
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+    animation-duration: .5s;
+    animation-timing-function: ease;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.fadeOut {
+    animation-name: fadeOut;
+    animation-fill-mode: forwards;
+    animation-duration: .5s;
+    animation-timing-function: ease;
+}
+
+@keyframes fadeOutIn {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeOutIn {
+    animation-name: fadeOutIn;
+    animation-fill-mode: forwards;
+    animation-duration: 3s;
+    animation-timing-function: ease;
+}
+
+/* -------------------------------------------------- */
+
+.sway {
+    animation: sway 2.5s infinite;
+    opacity: 1;
+}
+
+@keyframes sway {
+
+    0%,
+    40% {
+        transform: skew(0deg, 0deg);
+    }
+
+    5% {
+        transform: skew(5deg, 5deg);
+    }
+
+    10% {
+        transform: skew(-4deg, -4deg);
+    }
+
+    15% {
+        transform: skew(3deg, 3deg);
+    }
+
+    20% {
+        transform: skew(-2deg, -2deg);
+    }
+
+    25% {
+        transform: skew(1deg, 1deg);
+    }
+
+    30% {
+        transform: skew(-0.6deg, -0.6deg);
+    }
+
+    35% {
+        transform: skew(0.3deg, 0.3deg);
+    }
+}
+
+#modalWrap {
+    display: none;
+    background: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.modalBox {
+    position: fixed;
+    width: 85%;
+    max-width: 240px;
+    height: 0;
+    top: -30%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+    opacity: 1;
+    display: none;
+    border-radius: 3px;
+    z-index: 1000;
+}
+
+.modalInner {
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: larger;
+}
+
+@media screen and (max-width: 1024px) {
+    /* 1024pxまでの幅の場合に適用される */
+
+    #screen {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #titleText,
+    #titleClick {
+        padding: 160px 0;
+    }
+
+    .modalBox,
+    .modalInner {
+        max-width: 400px;
+        font-size: xx-large;
+    }
+
+    .itemBox {
+        top: 60%;
+        left: 50%;
+        min-height: 100%;
+        min-width: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    .characterPosition {
+        width: 100vw;
+        height: 100vh;
+
+    }
+
+    #characterPosition1 {
+        /*一人・三人表示(中央)*/
+        left: 0px;
+    }
+
+    #characterPosition2 {
+        /*二人表示(左)*/
+        left: -250px;
+    }
+
+    #characterPosition3 {
+        /*二人表示(右)*/
+        left: 250px;
+    }
+
+    #characterPosition4 {
+        /*三人表示(左)*/
+        left: -330px;
+        padding-top: 100px;
+    }
+
+    #characterPosition5 {
+        /*三人表示(右)*/
+        left: 300px;
+        padding-top: 50px;
+    }
+
+    #textArea {
+        width: 65vw;
+        height: 35vh;
+        top: 700px;
+        padding-left: 30px;
+        padding-right: 120px;
+    }
+
+    #textBox {
+        width: 75vw;
+        height: 35vh;
+    }
+
+    #text {
+        color: #fff;
+        font-size: 2rem;
+        font-family: serif;
+    }
+
+    .select {
+
+        width: 70vw;
+        height: 10vh;
+    }
+
+    #select1 {
+        top: 100px;
+    }
+
+    #select2 {
+        top: 260px;
+    }
+
+    #select3 {
+        top: 420px;
+    }
+
+    .selectText {
+        line-height: 135px;
+        font-size: 2rem;
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* 768pxまでの幅の場合に適用される */
+
+    #screen {
+        width: 100vw;
+        height: 100vh;
+        padding-bottom: 10%;
+    }
+
+    #titleText,
+    #titleClick {
+        padding: 120px 0;
+    }
+
+    .itemBox {
+        top: 60%;
+        left: 50%;
+        min-height: 100%;
+        min-width: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    .characterPosition {
+        width: 100vw;
+        height: 100vh;
+
+    }
+
+    #characterPosition1 {
+        /*一人・三人表示(中央)*/
+        left: 0px;
+    }
+
+    #characterPosition2 {
+        /*二人表示(左)*/
+        left: -30px;
+    }
+
+    #characterPosition3 {
+        /*二人表示(右)*/
+        left: 90px;
+    }
+
+    #characterPosition4 {
+        /*三人表示(左)*/
+        left: -166px;
+        padding-top: 0px;
+    }
+
+    #characterPosition5 {
+        /*三人表示(右)*/
+        left: 226px;
+        padding-top: 106px;
+    }
+
+    #textArea {
+        width: 65vw;
+        height: 40vh;
+        top: 480px;
+        padding-left: 10px;
+        padding-right: 70px;
+    }
+
+    #textBox {
+        width: 75vw;
+        height: 35vh;
+    }
+
+    #text {
+        color: #fff;
+        font-size: 1.4rem;
+        font-family: serif;
+    }
+
+    .select {
+
+        width: 70vw;
+        height: 10vh;
+    }
+
+    #select1 {
+        top: 80px;
+    }
+
+    #select2 {
+        top: 200px;
+    }
+
+    #select3 {
+        top: 320px;
+    }
+
+    .selectText {
+        line-height: 95px;
+        font-size: 1.4rem;
+    }
+}

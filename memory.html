@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ぴえんすいじゃく</title>
+    <link rel="icon" href="image/logoIcon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ぴよたその神経衰弱です。">
+    <link rel="stylesheet" media="screen" href="css/memory.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css"
+        type="text/css" media="all" />
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-house-chimney"></i></a></li>
+            <li><a class="navMenu" onclick="openSecretList()"><i class="fa-solid fa-list-check"></i></a></li>
+            <li><a class="navMenu" onclick="openBgm()"><i class="fa-solid fa-music"></i></a></li>
+            <li><a class="navMenu" onclick="openRecord()"><i class="fa-solid fa-ranking-star"></i></a></li>
+            <li><a class="navMenu" onclick="openPair()"><i class="fa-solid fa-gamepad"></i></a></li>
+            <li><span id="navPairNumber" onclick="featherChange()"><i class="fa-solid fa-feather"></i></span></li>
+        </ul>
+    </nav>
+    <div class="flex_grand">
+        <div class="flex_parent">
+            <div id="board"></div>
+            <div id="timer"><span id="timerIcon" onclick=""></span>TIME: <div id="time">0.00</div>
+            </div>
+            <!-- oncopy="alert('Copying forbidden!'); return false" → 本来はコピペ防止用-->
+            <div id="trick" class="largeDisplay" oncopy="alert('Alt + Shift + Click !'); return false">
+                Click the Button&thinsp;!</div>
+            <!-- テスト用 -->
+            <!-- <div class="test">
+                <div id="judge">タイム</div>
+                <div id="count">ペア数</div>
+            </div> -->
+        </div>
+        <div class="flex_child">
+            <div id="firstObject" onclick="cheat()"></div>
+            <!-- firstObject と supportMessage の位置調整用として全角空白をセット（cssでの調整や innerHTML を使用したくないため） -->
+            <div id="supportMessage">　</div>
+            <div id="secondObject"></div>
+            <div class="smallDisplay">&thinsp;&thinsp;Push the Button&thinsp;!</div>
+            <div id="thirdObject"></div>
+            <div id="resultMessage"></div>
+        </div>
+    </div>
+    <div class="buttons">
+        <span class="tooltip">
+            <button class="selfBtn" id="start"><i class="fa-solid fa-play fa-lg"></i></button>
+            <!-- <span class="description_top"><i class="fa-solid fa-volume-high fa-2x"></i></span> -->
+        </span>
+        <button class="selfBtn" id="stop"><i class="fa-solid fa-pause fa-lg"></i></button>
+        <span class="tooltip">
+            <button class="selfBtn" id="reset"><i class="fa-solid fa-reply fa-lg"></i></button>
+            <span class="description_top" id="reloadType"></span>
+        </span>
+        <audio id="defaultMusic" loop>
+            <source src="./music/heaven_and_hell.m4a" type="audio/aac">
+            <source src="./music/heaven_and_hell.ogg" type="audio/ogg">
+            <source src="./music/heaven_and_hell.mp3" type="audio/mpeg">
+            <p>音声非対応のブラウザのため音は鳴りません</p>
+        </audio>
+    </div>
+
+    <dialog id="secretDialog">
+        <div id="secretClose"><button class="secretClose">×</button></div>
+        <div id="secretCaption">LIST</div> <br>
+        <div id="secretList">
+            <div class="initialBlinking"><i class="fa-regular fa-square-check"></i>1.このヒミツのリストをみる</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>2.タイムで６０びょうをきる</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>3.こうそくリロードであそぶ</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>4.チートモードでプレイする</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>5.ヒミツのおとをみつける１</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>6.ヒミツのおとをみつける２</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>7.ヒミツのおとをみつける３</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>8.プレイかいすうをみつける</div>
+            <div> <span class="squareCheck"></span><i class="fa-regular fa-square"></i>9.<i
+                    class="fa-regular fa-copyright"></i>カイハツシャをみつける
+            </div>
+            <div id="description" class="faa-parent animated-hover">
+                <i class="fa-solid fa-kiwi-bird faa-horizontal fa-flip-horizontal"></i>
+                <span class="initialBlinking" onclick="descriptionAlert()">PIEN SUIJYAKU</span>
+                <i class="fa-solid fa-kiwi-bird faa-horizontal fa-flip-horizontal"></i>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="bgmDialog">
+        <table>
+            <div id="backdropOpen" onclick="openBackdrop()">
+                <button class="backdropOpen"> <i class="fa-solid fa-palette"></i></button>
+            </div>
+            <div id="bgmClose"><button class="bgmClose">×</button></div>
+            <caption>
+                <div class="caption">BGM</div>
+            </caption>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData">てんごくじごく</td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData">うぃりあむてる</td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData">あおりんご</td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData">かいじゅう</td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData bgmTitle"></td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData bgmTitle"></td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="bgmFont">
+                <td class="bgmData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="bgmData bgmTitle"></td>
+                <td class="bgmData"><button class="bbSelect">this</button></td>
+            </tr>
+        </table>
+    </dialog>
+
+    <dialog id="backdropDialog">
+        <table>
+            <div id="backdropClose"><button class="backdropClose">×</button></div>
+            <caption>
+                <div class="caption">BACKDROP</div>
+            </caption>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData">いちまつもよう</td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData">みずたまもよう</td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData">たてちぇっく</td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData">ななめちぇっく</td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData backdropTitle"></td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData backdropTitle"></td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+            <tr id="" class="backdropFont">
+                <td class="backdropData bbRight"><i class="fa-solid fa-caret-right"></i></td>
+                <td class="backdropData backdropTitle"></td>
+                <td class="backdropData"><button class="bbSelect">this</button></td>
+            </tr>
+        </table>
+    </dialog>
+
+    <dialog id="loadingDialog">
+        <div class="loadingMessage">LOADING</div>
+        <div class="loadingBar"></div>
+    </dialog>
+
+    <dialog id="recordDialog">
+        <table>
+            <div id="recordClose"><button class="recordClose">×</button></div>
+            <caption>
+                <div class="caption">RANKING</div>
+            </caption>
+            <tr>
+                <td class="recordData">No.1&nbsp;</td>
+                <td class="recordData" id="firstPlace"></td>
+                <td class="recordData">&nbsp;sec.</td>
+            </tr>
+            <tr>
+                <td class="recordData">No.2&nbsp;</td>
+                <td class="recordData" id="secondPlace"></td>
+                <td class="recordData">&nbsp;sec.</td>
+            </tr>
+            <tr>
+                <td class="recordData">No.3&nbsp;</td>
+                <td class="recordData" id="thirdPlace"></td>
+                <td class="recordData">&nbsp;sec.</td>
+            </tr>
+            <div id="recordAdjustments"></div>
+            <tr>
+                <td colspan="3" id="btnArea">
+                    <!-- Alt + Shift + Click ! -->
+                    <a class="btn btn-press" id="crownBtn" onclick="deleteRecord(event)">
+                        <span class="btn-press-front">DELETE</span>
+                        <i class="fas fa-chess-king fa-position-right fa-2x" id="crownPictograph"></i>
+                    </a>
+                </td>
+            </tr>
+            <tr id="tpc">
+                <td colspan="3" id="tpcCaption">Total Play Count</td>
+            </tr>
+            <tr id="tpcTimes">
+                <td></td>
+                <td id="setTimes"></td>
+                <td>times</td>
+            </tr>
+        </table>
+    </dialog>
+
+    <dialog id="pairDialog">
+        <div id="pairClose"><button class="pairClose">×</button></div>
+        <div id="pair">
+            <div id="pairCaption">PAIRS</div> <br>
+            <button class="three" onclick="three()">
+                <div id="blockNumber3">3</div>
+            </button>
+            <button class="five" onclick="five()">
+                <div id="blockNumber5">5</div>
+            </button>
+            <button class="seven" onclick="seven()">
+                <div id="blockNumber7">7</div>
+            </button>
+        </div>
+        <div id="btnArea">
+            <a class="btn btn-press" onclick="fifteen()">
+                <span class="btn-press-front">DEFAULT</span>
+                <i class="fas fa-medal fa-position-right fa-2x"></i>
+            </a>
+        </div>
+    </dialog>
+
+    <dialog id="newGameDialog">
+        <div class="newGame">
+            <div class="gameTitle">
+                <div class="grow slideColor">PIEN<span><i class="fa-solid fa-droplet fa-sm"></i></span>SUIJYAKU</div>
+                <div class="shrink">by PIYOTASO</div>
+            </div>
+            <div class="gameBegin">
+                <span class="tooltip">
+                    <button class="selfBtn beginBtn">NEW GAME</button>
+                    <span class="description_top"><i class="fa-solid fa-volume-high fa-2x"></i></span>
+                </span>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="unameDialog">
+        <div class="unameImg"></div>
+        <form id="unameForm">
+            <p id="unameMessage"></p>
+            <div>
+                <p id="word-area">いま <span id="word-count">0</span> もじ</p>
+                <label for="uname">なまえ:</label>
+                <input type="text" id="uname" required size="18" placeholder="ひらがな ２～５もじ" pattern="[ぁ-ん]+" minlength="2"
+                    maxlength="5" oninput="limitTextLength();" /> <span class="validity"></span>
+                <input type="button" value="けってい" id="decisionButton">
+            </div>
+        </form>
+        <div class="unameImg reverse"></div>
+    </dialog>
+
+    <dialog id="trickDialog">
+        <div class="featherFalling">
+            <div id="trickList"></div>
+        </div>
+    </dialog>
+
+    <dialog id="completedDialog" class="completedBackground">
+        <p class="completedMessage"></p>
+        <button class="completedClose"></button>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </dialog>
+
+    <script src="js/memory.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1868 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+nav ul {
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    position: relative;
+    padding-right: 15px;
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #aaa;
+    display: inline-block;
+    width: 100%;
+}
+
+nav ul li a.navMenu {
+    color: #555;
+    cursor: pointer;
+}
+
+nav ul li a.navMenu:hover {
+    color: #16caca;
+}
+
+nav ul li a:hover {
+    color: #885550;
+}
+
+nav ul li span {
+    float: unset;
+}
+
+#board {
+    width: 400px;
+    height: 480px;
+    overflow: hidden;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.card {
+    width: 64px;
+    height: 88px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    box-shadow: gray 2px 2px;
+    background: white;
+    float: left;
+    cursor: pointer;
+}
+
+img {
+    width: 64px;
+    height: 88px;
+}
+
+/* カード裏 */
+.back {
+    background-image: url('../image/p.png');
+    background-size: 64px 88px;
+}
+
+/* カードが揃った後の場所 */
+.finish {
+    opacity: 0;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* 経過秒数 */
+#timer {
+    display: flex;
+    margin-left: 80px;
+    margin-bottom: 10%;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: "Press Start 2P", serif;
+}
+
+/* timerIcon(trophyIcon) */
+#timerIcon {
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.2em;
+    margin-left: -7px;
+    padding-right: 5px;
+    margin-top: -3px;
+    cursor: pointer;
+}
+
+/* 結果表示 */
+#resultMessage {
+    font-family: "DotGothic16", serif;
+    font-size: 1.4em;
+    font-weight: 900;
+    text-align: center;
+}
+
+#supportMessage {
+    margin-top: 4%;
+    font-family: "DotGothic16", serif;
+    font-size: 1.4em;
+    font-weight: 900;
+    text-align: center;
+}
+
+#firstObject {
+    margin: auto;
+    width: 160px;
+    height: 160px;
+    background-position: center center;
+    background-size: cover;
+    cursor: pointer;
+}
+
+#secondObject {
+    margin: auto;
+    width: 160px;
+    height: 160px;
+    background-position: center center;
+    background-size: cover;
+}
+
+#thirdObject {
+    margin: auto;
+    width: 160px;
+    height: 160px;
+    background-position: center center;
+    background-size: cover;
+}
+
+#secretDialog,
+#bgmDialog,
+#backdropDialog,
+#pairDialog,
+#recordDialog {
+    font-family: "Press Start 2P", serif;
+    border-radius: 0.5rem;
+}
+
+#secretClose,
+#bgmClose,
+#backdropClose,
+#pairClose,
+#recordClose {
+    margin: -8px -8px 16px;
+    text-align: right;
+    height: 2.3rem;
+}
+
+#backdropOpen {
+    margin: -8px -8px 16px;
+    float: left;
+}
+
+.secretClose,
+.backdropOpen,
+.bgmClose,
+.backdropClose,
+.pairClose,
+.recordClose,
+.bbSelect,
+.trickSelect {
+    padding: 0.4rem;
+    font-family: "Press Start 2P", serif;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 0.4rem;
+}
+
+.secretClose:hover,
+.backdropOpen:hover,
+.bgmClose:hover,
+.backdropClose:hover,
+.pairClose:hover,
+.recordClose:hover,
+.bbSelect:hover,
+.trickSelect:hover {
+    background-color: #0ddddd;
+    color: white;
+}
+
+.trickSelect {
+    font-size: 1.4em;
+}
+
+.trickSelect.red {
+    margin-right: 32px;
+}
+
+.trickSelect.red:hover {
+    background-color: red;
+}
+
+#trickList span {
+    color: red;
+    font-size: 1.6em;
+}
+
+#secretCaption,
+.caption,
+#pairCaption {
+    font-size: large;
+    background: linear-gradient(transparent 20%, #16caca 80%);
+    text-align: center;
+    font-weight: 900;
+}
+
+#btnArea {
+    padding-top: 24px;
+    padding-bottom: 32px;
+    text-align: center;
+}
+
+#secretList,
+.bgmFont,
+.backdropFont {
+    font-family: "DotGothic16", serif;
+    font-size: large;
+    font-weight: 900;
+}
+
+.fa-square,
+.fa-square-check {
+    padding-right: 10px;
+}
+
+.bbRight,
+#crownPictograph {
+    opacity: 0;
+}
+
+#description {
+    font-family: "Press Start 2P", serif;
+    text-align: center;
+    padding: 20px 0px 0px;
+}
+
+#description span {
+    font-size: small;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#description span:hover {
+    text-decoration: solid underline #16caca 4px;
+}
+
+/* #recordDialog の #recordClose と #crownBtn 以外の table 範囲のカーソルをキングスライムにする */
+#recordDialog:not(#recordClose, #crownBtn) table {
+    cursor: url(../image/cursor_kingSlime.cur), none;
+}
+
+#recordDialog .btn-press-front:hover {
+    cursor: pointer;
+}
+
+#pair {
+    text-align: center;
+    cursor: url(../image/cursor_mario.cur), auto;
+}
+
+#pairDialog .btn {
+    cursor: url(../image/cursor_mushroom.cur), auto;
+}
+
+.bgmData,
+.backdropData,
+.trickData {
+    padding: 4px 8px;
+}
+
+.recordData {
+    text-align: center;
+}
+
+caption {
+    padding-bottom: 24px;
+}
+
+#recordAdjustments {
+    margin-bottom: -15px;
+}
+
+#tpcCaption {
+    background: linear-gradient(transparent 20%, #16caca 100%);
+    text-align: center;
+}
+
+#tpc {
+    visibility: collapse;
+}
+
+#tpcTimes {
+    visibility: collapse;
+    height: 2.4em;
+    text-align: center;
+}
+
+.three,
+.five,
+.seven {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-family: "Press Start 2P", serif;
+    font-size: x-large;
+    color: white;
+    background: #F88D2E;
+    border: 4px solid #070000;
+    border-radius: 0.4rem;
+    box-shadow: inset -4px -4px 0 #965117, inset 4px 4px 0 #FAB89B;
+    width: 64px;
+    height: 64px;
+}
+
+.three:hover,
+.five:hover,
+.seven:hover {
+    background: #885818;
+    box-shadow: inset -4px -4px 0 #68400B, inset 4px 4px 0 #FAB89B;
+    cursor: url(../image/cursor_marioJump.cur), auto;
+}
+
+/* ゆっくり消失 */
+@keyframes slowlyFadeOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ゆっくり出現 */
+@keyframes slowlyFadeIn {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 文字を横回転させる */
+@keyframes blockNumberRotate {
+
+    0% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(-180deg);
+    }
+}
+
+/* ブロックに下から頭突きした感じ */
+@keyframes blockJump {
+
+    79%,
+    90%,
+    97%,
+    100% {
+        transform: translate(0);
+    }
+
+    85% {
+        transform: translateY(-24px);
+    }
+
+    94% {
+        transform: translateY(-4px);
+    }
+
+    99% {
+        transform: translateY(-2px);
+    }
+}
+
+/* 衝撃で一瞬だけ光った感じ */
+@keyframes shine {
+
+    0% {
+        opacity: 1;
+    }
+
+    /* 50% {
+        opacity: 0;
+    } */
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.three:active,
+.five:active,
+.seven:active {
+    /* animation: を複数使用する場合 */
+    animation: blockJump 0.2s linear, shine 0.1s linear;
+}
+
+/* デリートボタン */
+.btn,
+a.btn,
+button.btn {
+    position: relative;
+    display: inline-block;
+    /* cursor: pointer; */
+    user-select: none;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+    color: #212529;
+    border-radius: 0.5rem;
+}
+
+a.btn-press {
+    margin-bottom: 0.5rem;
+    padding: 0;
+    border-radius: 0.75rem;
+}
+
+a.btn-press:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    content: "";
+    transition: all 0.3s;
+    transform: translate3d(0, 0.75rem, -1rem);
+
+    border: 2px solid #000;
+    border-radius: inherit;
+    background: #ccc100;
+    box-shadow: 0 0.6rem 0 0 rgba(0, 0, 0, 0.2);
+}
+
+a.btn-press:after {
+    font-family: "Font Awesome 6 Free";
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 1;
+    position: absolute;
+    top: calc(50% - 1rem);
+    left: 0.65rem;
+    margin: 0;
+    padding: 0;
+    content: "\f111";
+}
+
+.btn-press-front {
+    position: relative;
+    display: block;
+    padding: 0.8rem 3.2rem 0.8rem 3.2rem;
+    transition: all 0.3s;
+    border: 2px solid #000;
+    border-radius: inherit;
+    background: #fff100;
+}
+
+.fa-position-left {
+    position: absolute;
+    top: calc(50% - 0.5em);
+    left: 1rem;
+}
+
+.fa-position-right {
+    position: absolute;
+    top: calc(50% - 0.5em);
+    right: 0.65rem;
+}
+
+a.btn-press:hover {
+    transform: translate(0, 0.25rem);
+    background: #fff100;
+}
+
+a.btn-press:hover:before {
+    transform: translate3d(0, 0.5rem, -1rem);
+    box-shadow: 0 0.35rem 0 0 rgba(0, 0, 0, 0.2);
+}
+
+a.btn-press:hover:after {
+    content: "\f5a4";
+}
+
+a.btn-press:active {
+    transform: translate(0rem, 0.75rem);
+}
+
+a.btn-press:active:before {
+    transform: translate3d(0, 0, -1rem);
+    box-shadow: 0 0.35rem 0 0 rgba(0, 0, 0, 0.2);
+}
+
+a.btn-press:active:after {
+    content: "\f118";
+}
+
+/* 花火 */
+@keyframes fireworks-animation {
+    0% {
+        transform: translate(-50%, 90vh);
+        width: 4px;
+        opacity: 1;
+    }
+
+    50% {
+        width: 4px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 400px;
+        opacity: 0;
+    }
+}
+
+#firework,
+#firework::before,
+#firework::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, gold 10px, #000 0) 50% 00%,
+        radial-gradient(circle, silver 10px, #000 0) 00% 50%,
+        radial-gradient(circle, #16caca 10px, #000 0) 50% 99%,
+        radial-gradient(circle, lime 10px, #000 0) 99% 50%,
+        radial-gradient(circle, blue 10px, #000 0) 80% 90%,
+        radial-gradient(circle, red 10px, #000 0) 95% 90%,
+        radial-gradient(circle, gold 10px, #000 0) 10% 60%,
+        radial-gradient(circle, silver 10px, #000 0) 31% 80%,
+        radial-gradient(circle, #16caca 10px, #000 0) 80% 10%,
+        radial-gradient(circle, lime 10px, #000 0) 90% 23%,
+        radial-gradient(circle, blue 10px, #000 0) 45% 20%,
+        radial-gradient(circle, red 10px, #000 0) 13% 24%;
+    background-size: 8px 8px;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    animation: fireworks-animation 4s infinite;
+}
+
+#firework::before {
+    transform: translate(-50%, -50%) rotate(25deg) !important;
+}
+
+#firework::after {
+    transform: translate(-50%, -50%) rotate(-37deg) !important;
+}
+
+#firework:nth-of-type(3),
+#firework:nth-of-type(3)::before,
+#firework:nth-of-type(3)::after {
+    top: 10%;
+    left: 72%;
+    animation-duration: 3.2s;
+}
+
+#firework:nth-of-type(4),
+#firework:nth-of-type(4)::before,
+#firework:nth-of-type(4)::after {
+    top: 28%;
+    left: 32%;
+    animation-duration: 3.6s;
+}
+
+/*disabled なら css 透過＆無効*/
+:disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+/*ホバー時動作*/
+.selfBtn:hover {
+    margin-top: 2px;
+    color: #fff;
+    background: #16caca;
+    border-bottom: 2px solid #708090;
+}
+
+/*波紋ボタン*/
+.selfBtn {
+    background-color: #16bbbb61;
+    border-bottom: 5px solid #708090;
+    position: relative;
+    /*波紋の基点とするためrelativeを指定*/
+    display: inline-block;
+    /*リンクの形状*/
+    margin: 0 10px 20px 10px;
+    border-radius: 8%;
+    text-decoration: none;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.1% 2% 0.2% 2%;
+}
+
+/*波形の設定*/
+.selfBtn:hover::before {
+    content: '';
+    position: absolute;
+    /*絶対配置で波形の位置を決める*/
+    right: -50%;
+    top: -100%;
+    border: 5px dotted #0ddddd;
+    /*波形の形状*/
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    opacity: 1;
+    /*はじめは不透明*/
+    animation: 1s circle forwards;
+    /*アニメーションの設定*/
+}
+
+.beginBtn {
+    font-family: "Jersey 15", serif;
+    font-weight: 900;
+    font-size: 40px;
+    visibility: hidden;
+}
+
+.selfBtn.beginBtn:hover::before {
+    right: 22%;
+}
+
+/*波形が広がるアニメーション*/
+@keyframes circle {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.tooltip {
+    /* 補足説明するテキストのスタイル */
+    position: relative;
+    cursor: pointer;
+    padding: 0 5px;
+    font-size: 0.9em;
+    color: #16caca;
+}
+
+.description_top {
+    /* ツールチップのスタイル */
+    width: 50px;
+    /* 横幅 */
+    position: absolute;
+    left: 50%;
+    bottom: 80%;
+    /* Y軸の位置 */
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    /* テキストとの距離 */
+    padding: 8px;
+    border-radius: 10px;
+    /* 角の丸み */
+    background-color: #666;
+    font-size: 0.7em;
+    color: #fff;
+    text-align: center;
+    visibility: hidden;
+    /* ツールチップを非表示に */
+    opacity: 0;
+    /* 不透明度を0％に */
+    z-index: 1;
+    transition: 0.5s all;
+    /* マウスオーバー時のアニメーション速度 */
+}
+
+.newGame .description_top {
+    margin-bottom: 80px;
+    margin-left: 40px;
+}
+
+/* active クリック時、あるいはクリックし続けている間に適用されるスタイル */
+.tooltip:active .description_top {
+    /* マウスオーバー時のスタイル */
+    bottom: 100%;
+    /* Y軸の位置 */
+    visibility: visible;
+    /* ツールチップを表示 */
+    opacity: .8;
+    /* 不透明度を100％に */
+}
+
+.buttons {
+    text-align: center;
+}
+
+.largeDisplay {
+    display: none;
+}
+
+.smallDisplay {
+    font-family: "Press Start 2P", serif;
+    margin: -40% auto -37.5%;
+    text-align: center;
+    font-weight: bold;
+    animation: blinking 1s ease-in-out infinite alternate;
+}
+
+@keyframes blinking {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ------------------------------------------------ */
+
+dialog {
+    animation: fade-out 0.7s ease-out;
+}
+
+dialog[open] {
+    animation: fade-in 0.7s ease-out;
+}
+
+dialog[open]::backdrop {
+    animation: backdrop-fade-in 0.7s ease-out forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+        display: none;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+        display: block;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+        display: block;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleY(0);
+        display: none;
+    }
+}
+
+@keyframes backdrop-fade-in {
+    0% {
+        background-color: rgb(0 0 0 / 0%);
+    }
+
+    100% {
+        background-color: rgb(0 0 0 / 25%);
+    }
+}
+
+::backdrop {
+    opacity: 0.25;
+
+    /* 市松模様 */
+    /* background: repeating-conic-gradient(white 0, white 25%, #cbcbcb 25%, #cbcbcb 50%);
+    background-repeat: space;
+    background-position: center center;
+    background-size: 20px 20px; */
+
+    /* 水玉模様(斜め二色) */
+    /* background: radial-gradient(#16caca 20%, transparent 20%), radial-gradient(#beca16 20%, transparent 20%);
+    background-repeat: round;
+    background-position: 0 0, 20px 20px;
+    background-size: 40px 40px; */
+
+    /* ストライプ(縦チェック半透明) */
+    /* background: linear-gradient(-90deg, rgba(22, 22, 202, 0.25) 50%, transparent 50%), linear-gradient(rgba(22, 22, 202, 0.25) 50%, transparent 50%);
+    background-repeat: space;
+    background-size: 20px 20px; */
+
+    /* ストライプ(斜めチェック半透明) */
+    /* background:
+        repeating-linear-gradient(-45deg, rgb(202, 22, 22, 0.25), rgb(202, 22, 22, 0.25) 10px, transparent 0, transparent 20px),
+        repeating-linear-gradient(45deg, rgb(202, 22, 202, 0.25), rgb(202, 22, 202, 0.25) 10px, transparent 0, transparent 20px); */
+
+    /* 虹パターン */
+    /* background: linear-gradient(45deg, #EE7166, #EEE666, #81EE66, #66EEBF, #66A8EE, #9866EE, #EE66CF); */
+
+    /* 虹パターン(集中線) */
+    /* background: repeating-conic-gradient(from 0deg,
+            #EE7166 0deg 10deg,
+            #EEE666 10deg 20deg,
+            #81EE66 20deg 30deg,
+            #66EEBF 30deg 40deg,
+            #66A8EE 40deg 50deg,
+            #9866EE 50deg 60deg,
+            #EE66CF 60deg 70deg); */
+
+    /* 画像パターン(大量) */
+    /* background-image: url("../image/logo.png"), url("../image/logoIcon.png");
+    background-repeat: no-repeat, space;
+    background-position: center, left top;
+    background-size: 60%, 8px; */
+
+    /* 各パターン共通の値 ＆ js記述減 ＆ cssの仕様(上書き)の確認のため残しておく) */
+}
+
+#unameDialog::backdrop {
+    /* ※ 一本線 */
+    background: repeating-conic-gradient(transparent, transparent 6deg, #919191 6deg 12deg);
+}
+
+#completedDialog::backdrop {
+    background: repeating-linear-gradient(-90deg, #ffeeeb, #ffeeeb 7px, #fdf6f5 7px, #fdf6f5 14px);
+    opacity: 1;
+}
+
+/* ------------------------------------------------ */
+
+#loadingDialog {
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+.loadingMessage {
+    padding-bottom: 8px;
+    font-size: x-large;
+    font-family: "Press Start 2P", serif;
+
+}
+
+.loadingBar {
+    width: 256px;
+    height: 16px;
+    background-image: linear-gradient(90deg,
+            #f3f3f3,
+            #f3f3f3 50%,
+            #16caca 50%,
+            #16caca);
+    background-size: 200%, 100%;
+    border-radius: 16px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 15%);
+    animation-name: loading-bar;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+    /* easeInOutQuintのイージング ※ググればチートシートが出てくる*/
+}
+
+@keyframes loading-bar {
+    0% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+/* ------------------------------------------------ */
+
+.newGame {
+    display: block;
+    font-family: "Press Start 2P", serif;
+    height: 48vh;
+}
+
+.gameTitle {
+    margin: 40px;
+}
+
+.gameBegin {
+    margin: 120px;
+    text-align: center;
+}
+
+.gameTitle span {
+    /* spanタグはインライン要素（縦横指定や移動ができないため「display:inline-block;」で動かせるようになる） */
+    display: inline-block;
+    margin: 8px;
+    color: #0ddddd;
+    animation: blinking 3s 4s, drop 3s 6s;
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(16px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.grow {
+    animation: grow 3s;
+    animation-fill-mode: forwards;
+}
+
+.shrink {
+    align-self: center;
+    margin-top: 20px;
+    padding-left: 120px;
+    opacity: 0;
+    animation: slowlyFadeIn 3s 9s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes grow {
+    0% {
+        font-size: 0;
+    }
+
+    100% {
+        font-size: 40px;
+    }
+}
+
+.slideColor {
+    display: inline-block;
+    color: transparent;
+    background-image: linear-gradient(90deg, #16caca, #16caca 50%, black 50%, black);
+    background-position: 100% 0;
+    background-clip: text;
+    background-size: 200% 100%;
+    transition: background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slideColor:hover {
+    background-position: 0 0;
+}
+
+/* ------------------------------------------------ */
+
+#unameDialog {
+    border: none;
+    background: none;
+    text-align: center;
+    width: 100vw;
+}
+
+.unameImg {
+    width: 90%;
+    margin: auto;
+    background-image: url("../image/buttocks.gif");
+    background-repeat: repeat-x;
+    background-size: 48px 64px;
+    overflow: hidden;
+    animation-name: warning;
+    /* animation-duration: 4s; */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.unameImg.reverse {
+    animation-direction: reverse;
+}
+
+@keyframes warning {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 30px 0;
+    }
+}
+
+#unameForm {
+    margin-top: -216px;
+    font-family: "DotGothic16", serif;
+    font-size: x-large;
+    font-weight: 900;
+}
+
+#unameMessage {
+    height: 20px;
+    padding: 0.5rem;
+}
+
+#unameMessage.error {
+    color: red;
+}
+
+#uname {
+    padding: 10px;
+    line-height: 1.5;
+    font-family: "DotGothic16", serif;
+    font-weight: 900;
+}
+
+#decisionButton {
+    padding: 10px;
+    line-height: 1.5;
+    font-family: "DotGothic16", serif;
+    font-weight: 900;
+    border-radius: 5px;
+    margin: 0 0 40px 40px;
+    background-color: ivory;
+    cursor: pointer;
+}
+
+#decisionButton:active {
+    background-color: #0ddddd;
+    color: white;
+}
+
+input:invalid {
+    background-color: ivory;
+    border: none;
+    outline: 2px solid #ca1616;
+    border-radius: 5px;
+}
+
+input:valid {
+    border: none;
+    outline: 2px solid #16caca;
+    border-radius: 5px;
+}
+
+input:invalid+span::after {
+    position: absolute;
+    content: "✖";
+    padding-left: 5px;
+    color: red;
+}
+
+input:valid+span::after {
+    position: absolute;
+    content: "✓";
+    padding-left: 5px;
+    color: green;
+}
+
+#word-count.max {
+    color: #dd3535;
+}
+
+#word-area.hidden {
+    visibility: hidden;
+}
+
+#word-area {
+    margin-left: -40px;
+}
+
+/* ------------------------------------------------ */
+
+#trickDialog {
+    width: 99vw;
+    height: 99vh;
+}
+
+#trickDialog table {
+    border-collapse: separate;
+    border-spacing: 16px;
+    width: 100%;
+}
+
+#trickDialog table thead {
+    font-size: 1.4em;
+    text-align: center;
+    letter-spacing: 0.2rem;
+}
+
+#trickDialog table img {
+    object-fit: cover;
+    object-position: center center;
+    width: 50%;
+    height: 50%;
+}
+
+/* td要素の1列目 */
+#trickDialog table tr td:first-child {
+    width: 3%;
+    text-align: right;
+}
+
+/* 2列目 */
+#trickDialog table tr td:nth-child(2) {
+    width: 22%;
+    text-align: center;
+}
+
+/* 3列目 */
+#trickDialog table tr td:nth-child(3) {
+    width: 35%;
+}
+
+/* 4列目 */
+#trickDialog table tr td:nth-child(4) {
+    width: 40%;
+    text-align: center;
+}
+
+/* tr要素の12行目 */
+#trickDialog table tr:nth-child(12) {
+    text-align: center;
+}
+
+#trickList {
+    font-size: large;
+    font-weight: bold;
+    font-family: "DotGothic16", serif;
+}
+
+.featherFalling {
+    height: 94vh;
+    background-image: url("../image/feather.webp"), url("../image/feather2.webp"), url("../image/feather3.webp");
+    background-repeat: repeat;
+    background-size: 300px 150px, 300px 200px, 300px 300px;
+    animation-name: feather-falling;
+    animation-duration: 3.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes feather-falling {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+
+    10% {
+        background-position: 4px 15px, -4px 20px, 0 30px;
+    }
+
+    20% {
+        background-position: 0 30px, 0 40px, 3px 60px;
+    }
+
+    30% {
+        background-position: -4px 45px, 4px 60px, 0 90px;
+    }
+
+    40% {
+        background-position: 0 60px, 0 80px, 3px 120px;
+    }
+
+    50% {
+        background-position: 3px 75px, -3px 100px, 0 150px;
+    }
+
+    60% {
+        background-position: 0 90px, 0 120px, -4px 180px;
+    }
+
+    70% {
+        background-position: -2px 105px, 2px 140px, 0 210px;
+    }
+
+    80% {
+        background-position: -1px 120px, 1px 160px, 2px 240px;
+    }
+
+    90% {
+        background-position: 1px 135px, -1px 180px, 1px 270px;
+    }
+
+    100% {
+        background-position: 0% 150px, 0% 200px, 0% 300px;
+    }
+}
+
+/* ------------------------------------------------ */
+
+#completedDialog {
+    background: url("../image/king.webp") no-repeat fixed right bottom / 160px,
+        url("../image/gamecock.webp") no-repeat #000 fixed right 8px bottom / 480px;
+    /* 複数画像かつ背景色も指定する場合は、最後の画像に背景色を指定すること */
+}
+
+.completedMessage {
+    position: relative;
+    padding: 8px;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    font-family: "DotGothic16", serif;
+    text-align: center;
+    white-space: pre-wrap;
+    /*「\n」を改行として表示する(textContent(JS)でやる用)*/
+}
+
+.completedMessage::after {
+    content: "|";
+    color: white;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.completedClose {
+    position: absolute;
+    /* absoluteの上下中央寄せ(短縮版)
+    inset: 0;
+    margin: auto; */
+    padding: 4px 10px 10px 4px;
+    width: 240px;
+    height: 60px;
+    background-color: #123456;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: "DotGothic16", serif;
+    letter-spacing: 4px;
+    top: 40%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.completedClose::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to top right, transparent 0%, lightyellow 50%, transparent 100%);
+    animation: glitterFlow 9s linear infinite;
+}
+
+/* マウスオーバーアクション */
+.completedClose:hover {
+    cursor: url(../image/cursor_trophy.cur), auto;
+    /* マウスカーソルをトロフィーに変更 */
+    transform: translateY(-5px);
+    /* ボタンを上方向に */
+    opacity: 0.8;
+    /* ホバー時の透明度 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    /* ホバー時の影 */
+}
+
+@keyframes glitterFlow {
+    0% {
+        transform: translateX(-1000%);
+    }
+
+    25% {
+        transform: translateX(1000%);
+    }
+
+    50% {
+        transform: translateX(-1000%);
+    }
+
+    75% {
+        transform: translateX(1000%);
+    }
+}
+
+/* キラキラ光る トロフィーアイコン用 */
+.fa-solid.fa-trophy {
+    position: relative;
+    animation: glitterAnimation 2s ease-in-out infinite;
+    color: goldenrod;
+}
+
+@keyframes glitterAnimation {
+
+    0%,
+    100% {
+        transform: scale(0.98);
+        opacity: 0.85;
+    }
+
+    24% {
+        transform: scale(0.96);
+        opacity: 0.9;
+    }
+
+    2% {
+        transform: scale(0.98);
+        opacity: 1;
+    }
+
+    24% {
+        transform: scale(0.96);
+        opacity: 0.85;
+    }
+}
+
+.completedBackground {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #000000;
+    overflow: hidden;
+    opacity: 0.75;
+}
+
+.completedBackground span {
+    width: 6vmin;
+    height: 6vmin;
+    border-radius: 6vmin;
+    backface-visibility: hidden;
+    position: absolute;
+    animation: move;
+    animation-duration: 6;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+.completedBackground span:nth-child(0) {
+    color: #16caca;
+    top: 98%;
+    left: 67%;
+    animation-duration: 190s;
+    animation-delay: -106s;
+    transform-origin: -12vw -8vh;
+    box-shadow: 12vmin 0 2.1513361586386943vmin currentColor;
+}
+
+.completedBackground span:nth-child(1) {
+    color: #ffff00;
+    top: 8%;
+    left: 32%;
+    animation-duration: 334s;
+    animation-delay: -137s;
+    transform-origin: 11vw 7vh;
+    box-shadow: 12vmin 0 1.555642021667132vmin currentColor;
+}
+
+.completedBackground span:nth-child(2) {
+    color: #ca1616;
+    top: 98%;
+    left: 16%;
+    animation-duration: 397s;
+    animation-delay: -133s;
+    transform-origin: 21vw 11vh;
+    box-shadow: -12vmin 0 1.763161786010109vmin currentColor;
+}
+
+.completedBackground span:nth-child(3) {
+    color: #ca16ca;
+    top: 8%;
+    left: 60%;
+    animation-duration: 249s;
+    animation-delay: -382s;
+    transform-origin: -6vw 18vh;
+    box-shadow: 12vmin 0 1.5096419728309034vmin currentColor;
+}
+
+.completedBackground span:nth-child(4) {
+    color: #ffff00;
+    top: 94%;
+    left: 50%;
+    animation-duration: 434s;
+    animation-delay: -89s;
+    transform-origin: 13vw -19vh;
+    box-shadow: -12vmin 0 1.7812686637829453vmin currentColor;
+}
+
+.completedBackground span:nth-child(5) {
+    color: #ca1616;
+    top: 58%;
+    left: 1%;
+    animation-duration: 217s;
+    animation-delay: -15s;
+    transform-origin: -10vw -11vh;
+    box-shadow: -12vmin 0 2.1681725554452864vmin currentColor;
+}
+
+.completedBackground span:nth-child(6) {
+    color: #ca16ca;
+    top: 46%;
+    left: 64%;
+    animation-duration: 201s;
+    animation-delay: -118s;
+    transform-origin: 9vw 2vh;
+    box-shadow: 12vmin 0 2.006856402257168vmin currentColor;
+}
+
+.completedBackground span:nth-child(7) {
+    color: #ca1616;
+    top: 84%;
+    left: 4%;
+    animation-duration: 8s;
+    animation-delay: -189s;
+    transform-origin: 19vw -17vh;
+    box-shadow: -12vmin 0 1.7140158190118582vmin currentColor;
+}
+
+.completedBackground span:nth-child(8) {
+    color: #ffff00;
+    top: 13%;
+    left: 98%;
+    animation-duration: 7s;
+    animation-delay: -68s;
+    transform-origin: -7vw 19vh;
+    box-shadow: -12vmin 0 2.1306491081235976vmin currentColor;
+}
+
+.completedBackground span:nth-child(9) {
+    color: #ca16ca;
+    top: 87%;
+    left: 79%;
+    animation-duration: 278s;
+    animation-delay: -438s;
+    transform-origin: 2vw -6vh;
+    box-shadow: -12vmin 0 2.0276097445413495vmin currentColor;
+}
+
+.completedBackground span:nth-child(10) {
+    color: #1616ca;
+    top: 87%;
+    left: 15%;
+    animation-duration: 288s;
+    animation-delay: -286s;
+    transform-origin: 5vw 22vh;
+    box-shadow: 12vmin 0 1.599146775855496vmin currentColor;
+}
+
+.completedBackground span:nth-child(11) {
+    color: #ca16ca;
+    top: 2%;
+    left: 99%;
+    animation-duration: 223s;
+    animation-delay: -382s;
+    transform-origin: 21vw -19vh;
+    box-shadow: -12vmin 0 1.8860394503530462vmin currentColor;
+}
+
+.completedBackground span:nth-child(12) {
+    color: #ca1616;
+    top: 23%;
+    left: 70%;
+    animation-duration: 164s;
+    animation-delay: -240s;
+    transform-origin: 17vw 6vh;
+    box-shadow: -12vmin 0 1.8380741006105104vmin currentColor;
+}
+
+.completedBackground span:nth-child(13) {
+    color: #1616ca;
+    top: 33%;
+    left: 53%;
+    animation-duration: 157s;
+    animation-delay: -140s;
+    transform-origin: -21vw -22vh;
+    box-shadow: 12vmin 0 1.5741597459399306vmin currentColor;
+}
+
+.completedBackground span:nth-child(14) {
+    color: #1616ca;
+    top: 54%;
+    left: 51%;
+    animation-duration: 92s;
+    animation-delay: -149s;
+    transform-origin: 24vw 9vh;
+    box-shadow: 12vmin 0 2.1932492121806884vmin currentColor;
+}
+
+.completedBackground span:nth-child(15) {
+    color: #ffff00;
+    top: 72%;
+    left: 21%;
+    animation-duration: 57s;
+    animation-delay: -315s;
+    transform-origin: 16vw 2vh;
+    box-shadow: 12vmin 0 1.7595614244435993vmin currentColor;
+}
+
+.completedBackground span:nth-child(16) {
+    color: #16caca;
+    top: 19%;
+    left: 32%;
+    animation-duration: 15s;
+    animation-delay: -91s;
+    transform-origin: -24vw 22vh;
+    box-shadow: 12vmin 0 2.3051967786600858vmin currentColor;
+}
+
+.completedBackground span:nth-child(17) {
+    color: #ca1616;
+    top: 49%;
+    left: 52%;
+    animation-duration: 224s;
+    animation-delay: -17s;
+    transform-origin: -19vw 11vh;
+    box-shadow: 12vmin 0 2.191583884176653vmin currentColor;
+}
+
+.completedBackground span:nth-child(18) {
+    color: #1616ca;
+    top: 81%;
+    left: 45%;
+    animation-duration: 411s;
+    animation-delay: -299s;
+    transform-origin: 0vw -1vh;
+    box-shadow: -12vmin 0 1.693643830982778vmin currentColor;
+}
+
+.completedBackground span:nth-child(19) {
+    color: #ca16ca;
+    top: 14%;
+    left: 28%;
+    animation-duration: 422s;
+    animation-delay: -392s;
+    transform-origin: -19vw 20vh;
+    box-shadow: 12vmin 0 2.464401965204461vmin currentColor;
+}
+
+.completedBackground span:nth-child(20) {
+    color: #ffff00;
+    top: 88%;
+    left: 23%;
+    animation-duration: 239s;
+    animation-delay: -391s;
+    transform-origin: 7vw -12vh;
+    box-shadow: 12vmin 0 1.7022683407540944vmin currentColor;
+}
+
+.completedBackground span:nth-child(21) {
+    color: #ca1616;
+    top: 11%;
+    left: 15%;
+    animation-duration: 382s;
+    animation-delay: -341s;
+    transform-origin: -7vw 16vh;
+    box-shadow: -12vmin 0 1.5392021548307262vmin currentColor;
+}
+
+.completedBackground span:nth-child(22) {
+    color: #ffff00;
+    top: 25%;
+    left: 40%;
+    animation-duration: 28s;
+    animation-delay: -379s;
+    transform-origin: 10vw -15vh;
+    box-shadow: 12vmin 0 1.6526090688106003vmin currentColor;
+}
+
+.completedBackground span:nth-child(23) {
+    color: #16caca;
+    top: 37%;
+    left: 75%;
+    animation-duration: 210s;
+    animation-delay: -409s;
+    transform-origin: 24vw 0vh;
+    box-shadow: 12vmin 0 1.8008484580137538vmin currentColor;
+}
+
+.completedBackground span:nth-child(24) {
+    color: #ffff00;
+    top: 94%;
+    left: 76%;
+    animation-duration: 51s;
+    animation-delay: -265s;
+    transform-origin: 3vw -20vh;
+    box-shadow: -12vmin 0 2.3730655030902925vmin currentColor;
+}
+
+.completedBackground span:nth-child(25) {
+    color: #16caca;
+    top: 82%;
+    left: 47%;
+    animation-duration: 195s;
+    animation-delay: -87s;
+    transform-origin: -1vw 13vh;
+    box-shadow: 12vmin 0 2.349750651251634vmin currentColor;
+}
+
+.completedBackground span:nth-child(26) {
+    color: #ffff00;
+    top: 61%;
+    left: 5%;
+    animation-duration: 410s;
+    animation-delay: -142s;
+    transform-origin: -1vw -18vh;
+    box-shadow: 12vmin 0 2.127238628715882vmin currentColor;
+}
+
+.completedBackground span:nth-child(27) {
+    color: #ca1616;
+    top: 55%;
+    left: 92%;
+    animation-duration: 110s;
+    animation-delay: -79s;
+    transform-origin: 15vw 8vh;
+    box-shadow: 12vmin 0 2.3960048611492604vmin currentColor;
+}
+
+.completedBackground span:nth-child(28) {
+    color: #ffff00;
+    top: 54%;
+    left: 53%;
+    animation-duration: 35s;
+    animation-delay: -259s;
+    transform-origin: 22vw 2vh;
+    box-shadow: -12vmin 0 1.9483875161252455vmin currentColor;
+}
+
+.completedBackground span:nth-child(29) {
+    color: #16caca;
+    top: 88%;
+    left: 29%;
+    animation-duration: 146s;
+    animation-delay: -63s;
+    transform-origin: -14vw -9vh;
+    box-shadow: -12vmin 0 1.5879537388851594vmin currentColor;
+}
+
+.completedBackground span:nth-child(30) {
+    color: #ffff00;
+    top: 62%;
+    left: 17%;
+    animation-duration: 422s;
+    animation-delay: -235s;
+    transform-origin: 12vw 10vh;
+    box-shadow: 12vmin 0 2.037784878028323vmin currentColor;
+}
+
+.completedBackground span:nth-child(31) {
+    color: #ffff00;
+    top: 52%;
+    left: 36%;
+    animation-duration: 251s;
+    animation-delay: -144s;
+    transform-origin: -17vw 15vh;
+    box-shadow: -12vmin 0 1.996755787222959vmin currentColor;
+}
+
+.completedBackground span:nth-child(32) {
+    color: #ffff00;
+    top: 55%;
+    left: 45%;
+    animation-duration: 369s;
+    animation-delay: -218s;
+    transform-origin: 8vw 25vh;
+    box-shadow: -12vmin 0 2.4260801927895193vmin currentColor;
+}
+
+.completedBackground span:nth-child(33) {
+    color: #1616ca;
+    top: 22%;
+    left: 42%;
+    animation-duration: 78s;
+    animation-delay: -217s;
+    transform-origin: 13vw 2vh;
+    box-shadow: -12vmin 0 1.5559671263478876vmin currentColor;
+}
+
+.completedBackground span:nth-child(34) {
+    color: #1616ca;
+    top: 71%;
+    left: 63%;
+    animation-duration: 250s;
+    animation-delay: -270s;
+    transform-origin: -18vw -13vh;
+    box-shadow: 12vmin 0 2.4530393979252536vmin currentColor;
+}
+
+.completedBackground span:nth-child(35) {
+    color: #ffff00;
+    top: 36%;
+    left: 1%;
+    animation-duration: 199s;
+    animation-delay: -369s;
+    transform-origin: 1vw 21vh;
+    box-shadow: -12vmin 0 1.5359041005768796vmin currentColor;
+}
+
+/* ------------------------------------------------ */
+
+/* PC画面用 */
+@media (min-width:1024px) {
+
+    .largeDisplay {
+        display: block;
+        margin: 6% auto -4%;
+        font-family: "Press Start 2P", serif;
+        font-size: small;
+        font-weight: bold;
+        text-align: center;
+        animation: blinking 1s ease-in-out infinite alternate;
+    }
+
+    .smallDisplay {
+        display: none;
+    }
+
+    .flex_grand {
+        max-width: 72%;
+        margin: 2% auto;
+        display: flex;
+    }
+
+    .flex_parent {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flex_child {
+        margin: auto;
+        padding-left: 12rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* 経過秒数 */
+    #timer {
+        margin-bottom: -2px;
+        margin-left: 88px;
+    }
+
+    /* 結果表示 */
+    #resultMessage {
+        margin: auto;
+        padding-left: 4rem;
+        font-size: 1.6em;
+    }
+
+    #supportMessage {
+        margin: auto;
+        font-size: 1.6em;
+        width: 100%;
+    }
+
+    /*波形の設定*/
+    .selfBtn:hover::before {
+        right: 1%;
+    }
+
+
+    /* hover マウスオーバー時に適用されるスタイル */
+    .tooltip:hover .description_top {
+        /* マウスオーバー時のスタイル */
+        bottom: 100%;
+        /* Y軸の位置 */
+        visibility: visible;
+        /* ツールチップを表示 */
+        opacity: .8;
+        /* 不透明度を100％に */
+    }
+
+    .buttons {
+        text-align: unset;
+        max-width: 72%;
+        margin: 10px auto;
+        padding-left: 128px;
+    }
+
+    nav ul {
+        margin-bottom: -15px;
+    }
+
+    nav ul li {
+        padding-right: 15px;
+        margin-right: 10px;
+    }
+
+    /* ------------------------------------------------ */
+
+    .gameTitle {
+        display: flex;
+        margin: 80px;
+    }
+
+    .shrink {
+        padding-left: 40px;
+    }
+
+    .selfBtn.beginBtn:hover::before {
+        right: 33%;
+    }
+
+    .newGame .description_top {
+        margin-bottom: 24px;
+        margin-left: 0px;
+    }
+
+    /* ------------------------------------------------ */
+
+    .unameImg {
+        width: 80%;
+        height: 240px;
+    }
+
+    #unameForm {
+        margin: -80px 0 0 80px;
+    }
+
+    #unameMessage {
+        margin-left: 50%;
+        /* margin-left: 720px; */
+    }
+
+    #decisionButton {
+        margin: 0 0 20px 40px;
+    }
+
+    #decisionButton:hover {
+        background-color: #0ddddd;
+        color: white;
+    }
+
+    /* ------------------------------------------------ */
+
+    .completedMessage {
+        top: 4%;
+        font-size: 40px;
+    }
+}

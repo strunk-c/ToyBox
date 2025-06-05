@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>玉子物語</title>
+  <link rel="icon" href="image/logoIcon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="玉子を叩き直す（潰す）お話しです。">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+  <link rel="stylesheet" media="screen" href="css/tmkStory.css">
+</head>
+
+<body>
+
+  <dialog>
+    <form method="dialog" id="dialog">
+      <p id="warning">
+        <i class="fa-solid fa-triangle-exclamation" style="color: #FFD43B;"></i> WARNING <i
+          class="fa-solid fa-triangle-exclamation" style="color: #FFD43B;"></i>
+      </p>
+      <p>このゲームは非常に危険です。</p>
+      <p>それでもプレイしますか？</p>
+      <a href="" class="yesButton">
+        <span class="side top">もちろん</span>
+        <span class="side front">はい</span>
+      </a>
+      <a href="./index.html" class="noButton">
+        <span class="side top">やめます</span>
+        <span class="side front">いいえ</span>
+      </a>
+      <form>
+  </dialog>
+
+  <div id="screen">
+    <header>
+      <div class="logo">
+        <a href="index.html"><img src="image/logoIcon.png" alt="" width="40" height="40" /></a>
+      </div>
+    </header>
+    <div class="selectBox">
+      <div class="select" id="select1">
+        <p class="selectText" id="selectText1"></p>
+      </div>
+      <div class="select" id="select2">
+        <p class="selectText" id="selectText2"></p>
+      </div>
+      <div class="select" id="select3">
+        <p class="selectText" id="selectText3"></p>
+      </div>
+    </div>
+    <img src="./img/bg0.gif" alt="" id="bgImg">
+    <div class="itemBox"><img src="" alt="" id="item"></div>
+    <div class="characterPosition" id="characterPosition1"><img src="" alt="" id="character1"></div><!--一人・三人表示-->
+    <div class="characterPosition" id="characterPosition2"><img src="" alt="" id="character2"></div><!--二人表示-->
+    <div class="characterPosition" id="characterPosition3"><img src="" alt="" id="character3"></div><!--二人表示-->
+    <div class="characterPosition" id="characterPosition4"><img src="" alt="" id="character4"></div><!--三人表示-->
+    <div class="characterPosition" id="characterPosition5"><img src="" alt="" id="character5"></div><!--三人表示-->
+    <div id="textArea">
+      <div id="textBox">
+        <p id="titleText">
+          <span>玉</span>
+          <span>子</span>
+          <span>物</span>
+          <span>語</span>
+          <span>（</span>
+          <span>たまこものがたり</span>
+          <span>）</span>
+        </p>
+        <p id="titleClick">
+          <span>ここを</span><span>押</span><span>し</span><span>て</span><span>くだ</span><span>さい</span><span>。</span>
+        </p>
+        <p id="text"></p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="none">
+        <p><a href="#attention" class="modal" id="popUp">クリック</a></p>
+        <p><a href="#attention2" class="modal" id="popUp2">クリック２</a></p>
+        <p><a href="#attention3" class="modal" id="popUp3">クリック３</a></p>
+        <p><a href="#attention4" class="modal" id="popUp4">クリック４</a></p>
+      </div>
+      <div class="modalBox" id="attention">
+        <div class="modalInner">
+          音 量 注 意
+        </div>
+      </div>
+      <div class="modalBox" id="attention2">
+        <div class="modalInner">
+          画 面 注 意
+        </div>
+      </div>
+      <div class="modalBox" id="attention3">
+        <div class="modalInner">
+          びっくりした？
+        </div>
+      </div>
+      <div class="modalBox" id="attention4">
+        <div class="modalInner">
+          またね
+        </div>
+      </div>
+    </div>
+    <!-- load 通知用 -->
+    <div id="load"></div>
+    <!-- save 通知用 -->
+    <div id="save"></div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="js/tmkStory.js"></script>
+
+  <script>
+    // ページ読み込み時の処理
+    window.addEventListener("load", () => {
+      let textArea = document.getElementById('textArea');
+      let titleText = document.getElementById('titleText');
+      let titleClick = document.getElementById('titleClick');
+      textArea.style.pointerEvents = 'none';
+
+      // localStorage の値を読み込み
+      let story = sessionStorage.getItem('story');
+
+      if (!story) {
+        sessionStorage.setItem('story', 'agreed');
+        setTimeout(() => {
+          const dialog = document.querySelector('dialog');
+          dialog.showModal();
+        }, 500);
+
+      } else {
+        // titleを表示してから3秒後に非表示
+        titleText.style.display = 'block';
+        setTimeout(() => {
+          titleText.style.display = 'none';
+        }, 3000);
+        // クリックを促すメッセージを3秒後に表示
+        setTimeout(() => {
+          titleClick.style.display = 'block';
+        }, 3000);
+        // 上記を非表示にしてからポインターON
+        setTimeout(() => {
+          titleClick.style.display = 'none';
+          textArea.style.pointerEvents = 'auto';
+        }, 6100);
+      }
+    });
+
+    // セーブポイント通知(テスト用)
+    // let alertBox = document.createElement("div");
+    // alertBox.id = "alertBox";
+    // alertBox.style.cssText = ' font-family: "New Tegomin", serif; font-weight: 900; font-size: x-large; color: black; width: 100%; padding: 20px 0; background-color: white; text-align: center; position: fixed; top: 0px; left: 0px; ';
+    // alertBox.textContent = 'セーブ・ポイント';
+    // document.body.appendChild(alertBox);
+    // function removeMsg() {
+    //   let alertBox = document.getElementById("alertBox");
+    //   let body = document.getElementsByTagName("body")[0];
+    //   body.removeChild(alertBox);
+    // }
+    // setTimeout('removeMsg()', 3000);
+  </script>
+
+</body>
+
+</html>

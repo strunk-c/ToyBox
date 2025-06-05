@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="インプットしたものをアウトプットする場所です。">
+    <title>PUT</title>
+    <link rel="icon" href="image/logoIcon.png">
+    <link rel="stylesheet" href="css/top.css" type="text/css" id="style" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ira-radio/css-documentStyle@1.0.0/code.min.css"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css"
+        type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;500&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <dialog id="dialog">
+        <div class="faa-parent animated-hover">
+            <i class=" fa-solid fa-star fa-lg fa-fw fa-spin animated"></i> オメデトウ <i
+                class="fa-solid fa-spaghetti-monster-flying fa-2x fa-fw faa-wrench"></i> ゾロ目ダヨ <i
+                class=" fa-solid fa-star fa-lg fa-fw faa-spin animated"></i>&emsp;
+            <button class="close" onclick="dialogClose()">閉じる</button>
+        </div>
+    </dialog>
+
+    <header>
+        <h1 class="animate top-wrapper-txt"><a href="index.html"><span>P</span><span>U</span><span>T</span></a></h1>
+        <div class="under animate top-wrapper-txt">
+            <span>G</span><span>a</span><span>l</span><span>l</span><span>e</span><span>r</span><span>y</span>&nbsp;<span>o</span><span>f</span>&nbsp;
+            <span>S</span><span>a</span><span>m</span><span>p</span><span>l</span><span>e</span><span>s</span>
+        </div>
+
+        <nav id="mainMenu" class="menu">
+            <ul>
+                <li><a href="#MENU_0"></a></li>
+                <li><a href="#MENU_1">河童公園</a></li>
+                <li><a href="#MENU_2">サロン</a></li>
+                <li><a href="#MENU_3">神経衰弱</a></li>
+                <li><a href="#MENU_4">ホラー</a></li>
+                <li><a href="#MENU_5">玉子の家</a></li>
+                <li><a href="#list">リスト</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button data-target="mainMenu" class="menu-toggler" data-open="false"></button>
+
+    <section id="revolution">
+        <section id="slideshow-win">
+            <section id="slideshow">
+                <div class="entire-content">
+                    <div class="content-carrousel">
+                        <figure class="shadow">
+                            <a href="park.html"><img alt src="./imgs/top_kappark.webp">
+                                <p>河童公園</p>
+                            </a>
+                        </figure>
+                        <figure class="shadow">
+                            <a href="salon.html"><img alt src="./imgs/top_salon.webp" />
+                                <p>サロン</p>
+                            </a>
+                        </figure>
+                        <figure class="shadow"><a href="memory.html"><img alt src="./imgs/top_memory.webp" />
+                                <p>神経衰弱</p>
+                            </a></figure>
+                        <figure class="shadow">
+                            <a href="demo.html"><img alt src="./imgs/top_demo.webp" />
+                                <p>ホラー</p>
+                            </a>
+                        </figure>
+                        <figure class="shadow">
+                            <a href="#MENU_5"><img alt src="./imgs/top_roomT.webp" />
+                                <p>玉子の家</p>
+                            </a>
+                        </figure>
+                        <figure class="shadow">
+                            <a href="#list"><img alt src="./imgs/list.webp" />
+                                <p>リスト</p>
+                            </a>
+                        </figure>
+                        <figure class="shadow">
+                            <!-- ディレクトリ表示 -->
+                            <!-- <a href="/"><img alt src="./imgs/crescentMoon.gif"></a> -->
+                            <a href="simple.html"><img alt src="./imgs/crescentMoon.gif"></a>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+
+    <main>
+        <div class="hero">
+            <article class="container">
+                <div id="blink">
+                    <img src="" id="left" class="float">
+                </div>
+                <div class="wrapper">
+                    <img src="" class="target" id="center">
+                </div>
+                <div id="turn" class="wrapper2">
+                    <img src="" id="right" class="target">
+                </div>
+            </article>
+        </div>
+        <article>
+            <h2>河童公園</h2>
+            <h3>カッパーク</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>サイト</dd>
+                    <dt>概要</dt>
+                    <dd>キッズ向けトップページです。ある条件を満たすとページに異変が起きます。</dd>
+                    <dt>画像</dt>
+                    <dd id="MENU_1">
+                        <div style="display: inline-block;">
+                            <a href="park.html"><img src="./imgs/top_kappark.webp" /></a><br />
+                            <small id="link"> <a href="park.html">カッパークに行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </article>
+        <article>
+            <h2>サロン</h2>
+            <h3>インテックスヘアー</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>サイト</dd>
+                    <dt>概要</dt>
+                    <dd>美容室サイトです。どこかに何かが隠れています。</dd>
+                    <dt>画像</dt>
+                    <dd id="MENU_2">
+                        <div style="display: inline-block;">
+                            <a href="salon.html"><img src="./imgs/top_salon.webp" /></a><br />
+                            <small id="link"> <a href="salon.html">インテックスヘアーに行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </article>
+        <article>
+            <h2>神経衰弱</h2>
+            <h3>ぴえんすいじゃく</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>ゲーム</dd>
+                    <dt>概要</dt>
+                    <dd>ぴよたそを揃えるゲームです。ひみつがたくさん。</dd>
+                    <dt>画像</dt>
+                    <dd id="MENU_3">
+                        <div style="display: inline-block;">
+                            <a href="memory.html"><img src="./imgs/top_memory.webp" /></a><br />
+                            <small id="link"> <a href="memory.html">ぴえんすいじゃくに行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </article>
+        <article>
+            <h2>ホラー</h2>
+            <h3>コンジアム</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>サイト</dd>
+                    <dt>概要</dt>
+                    <dd>ホラー風のデモページです。</dd>
+                    <dt>画像</dt>
+                    <dd id="MENU_4">
+                        <div style="display: inline-block;">
+                            <a href="demo.html"><img src="./imgs/top_demo.webp" /></a><br />
+                            <small id="link"> <a href="demo.html">コンジアムに行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </article>
+        <article>
+            <h2>玉子の家</h2>
+            <h3>玉子の部屋</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>サイト</dd>
+                    <dt>概要</dt>
+                    <dd>玉子の部屋です。ルールル、ルルル、ルールル。</dd>
+                    <dt>画像</dt>
+                    <dd id="MENU_5">
+                        <div style="display: inline-block;">
+                            <a href="tmkRoom.html"><img src="./imgs/top_roomT.webp" /></a><br />
+                            <small id="link"> <a href="tmkRoom.html">玉子の部屋に行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <h3>玉子の押入</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>サイト</dd>
+                    <dt>概要</dt>
+                    <dd>玉子の押入です。危険。</dd>
+                    <dt>画像</dt>
+                    <dd>
+                        <div style="display: inline-block;">
+                            <a href="fraud.html"><img src="./imgs/top_fraud.webp" /></a><br />
+                            <small id="link"> <a href="fraud.html">玉子の押入に行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <h3>玉子物語</h3>
+            <div>
+                <dl class="inline">
+                    <dt>種類</dt>
+                    <dd>ゲーム</dd>
+                    <dt>概要</dt>
+                    <dd>玉子を導く（叩きのめす）ゲームです。</dd>
+                    <dt>画像</dt>
+                    <dd>
+                        <div style="display: inline-block;">
+                            <a href="tmkStory.html"><img src="./imgs/top_storyT.webp" /></a><br />
+                            <small id="link"> <a href="tmkStory.html">玉子物語に行く</a></small>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </article>
+
+        <h3 class="faa-parent animated-hover" id="contactButton" onclick="contact()">
+            <i class="fa-solid fa-envelope fa-2x faa-wrench"></i>&emsp;
+            <i class="fa-solid fa-c fa-beat-fade"></i>
+            <i class="fa-brands fa-ello fa-bounce"></i>
+            <i class="fa-solid fa-n fa-fade"></i>
+            <i class="fa-solid fa-t fa-flip"></i>
+            <i class="fa-solid fa-a fa-fade"></i>
+            <i class="fa-solid fa-c fa-beat-fade"></i>
+            <i class="fa-solid fa-t fa-flip"></i>&emsp;
+            <i class="fa-solid fa-paper-plane fa-lg faa-passing animated"></i>
+        </h3>
+        <div id="contact">
+            <article>
+                <h2>お問合せ</h2>
+                <div>
+                    <p>
+                        メッセージは以下からお願いいたします。<br />
+                        <small>※サンプルのため送信できません。</small>
+                    </p>
+                    <form class="form-block">
+                        <dl class="inline">
+                            <dt>name</dt>
+                            <dd>
+                                <input type="text" placeholder="名前" />
+                            </dd>
+                            <dt class="required">message</dt>
+                            <dd>
+                                <textarea placeholder="本文" rows="5"></textarea>
+                            </dd>
+                        </dl>
+                        <button type="submit">送信</button>
+                    </form>
+                </div>
+                <div class="info-data">
+                    <p> 返信率：<span data-count="100">0</span>％</p>
+                    <p> 未読率：<span data-count="100">0</span>％</p>
+                    <p> 既読率：<span data-count="0">0</span>％</p>
+                </div>
+                <div class="contact-container">
+                    <div class="box">
+                        <div class="spin-container">
+                            <div class="shape">
+                                <div class="obj">SAMPLE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <div>
+        <div id="list">
+            <h3>&emsp;&emsp;リスト</h3>
+            <div>
+                <ul>
+                    <li>
+                        <a href="park.html">カッパーク</a>&emsp;&emsp;&emsp;&emsp;<span
+                            class="description">キッズ向けトップページ</span>
+                    </li>
+                    <li>
+                        <a href="salon.html">インテックスヘアー</a><span class="description">美容室サイト</span>
+                    </li>
+                    <li>
+                        <a href="memory.html">ぴえんすいじゃく</a>&emsp;<span class="description">ひみつの神経衰弱</span>
+                    </li>
+                    <li>
+                        <a href="demo.html">コンジアム</a>&emsp;&emsp;&emsp;&emsp;<span class="description">ホラー風デモページ</span>
+                    </li>
+                    <li>
+                        <a href="tmkRoom.html">玉子の部屋</a>&emsp;&emsp;&emsp;&emsp;<span
+                            class="description"><s>徹子（てつこ）の部屋</s></span>
+                    </li>
+                    <li>
+                        <a href="fraud.html">玉子の押入</a>&emsp;&emsp;&emsp;&emsp;<span
+                            class="description">サギ、ダメ、ゼッタイ</span>
+                    </li>
+                    <li>
+                        <a href="tmkStory.html">玉子物語</a>&emsp;&emsp;&emsp;&emsp;&emsp;<span
+                            class="description">ノベルゲーム</span>
+                    </li>
+                </ul>
+            </div>
+            <h3>&emsp;&emsp;プラン</h3>
+            <div>
+                <ul>
+                    <li>
+                        <a tabindex="-1">タップの達人</a>&emsp;&emsp;&emsp;<span class="description">リズムゲーム</span>
+                    </li>
+                    <li>
+                        <a tabindex="-1">？？？</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="description">？？？</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="bottomImageDiv">
+            <img src="" id="bottomImage">
+        </div>
+        <div class="text-small text-right">
+            <small>&copy; 2025 STRUNKS</small>
+        </div>
+        <nav id="pageBottomNav" class="fixed-menu">
+            <ul>
+                <li id="pageTop" class="pageTopFont">
+                    <button></button>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/top.js"></script>
+</body>
+
+</html>

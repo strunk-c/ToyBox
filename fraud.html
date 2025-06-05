@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>玉子の押入</title>
+    <link rel="icon" href="image/logoIcon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="サギ、ダメ、ゼッタイ。">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        .d-none {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-fullheight" style="background: url(./img/closet.jpg) center">
+        <div class="hero-body" id="app">
+            <div class="container">
+                <div v-if="seen" class="notification">
+                    <progress class="progress is-small is-primary" max="100"></progress>
+                    <p class="is-size-4">{{ message }}</p>
+                </div>
+                <h1 class="title is-size-1 has-text-white" id="special"></h1>
+                <p class="is-size-3 has-text-white has-text-weight-bold" id="special2"></p>
+                <p class="is-size-3 has-text-white has-text-weight-bold" id="special3"></p>
+                <button v-on:click=" move" class="button is-primary is-large has-text-weight-bold" id="yes"
+                    onclick="disabled = true"></button>
+                <a href="park.html"><button class="button is-danger is-large has-text-weight-bold" id="no"></button></a>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        // sessionStorage に保存したデータを取得
+        let data = sessionStorage.getItem('storage');
+        let special = document.getElementById('special');
+        let special2 = document.getElementById('special2');
+        let special3 = document.getElementById('special3');
+        let yes = document.getElementById('yes');
+        let no = document.getElementById('no');
+
+        if (!data) {
+            special.innerHTML = '玉子の押入';
+            special2.innerHTML = '「この世の全てをそこに置いてきた」';
+            special3.innerHTML = '彼女の真意を知る覚悟が、君にはあるか';
+            yes.innerHTML = 'ある';
+            no.innerHTML = 'ない';
+        } else {
+            special.innerHTML = '玉子の押売';
+            special2.innerHTML = '「今際の際だぞ」';
+            special3.innerHTML = '彼女が恐喝する時の口癖は、決まってそれだった';
+            yes.innerHTML = '支払う';
+            no.innerHTML = '支払わない';
+        }
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                seen: false,
+                message: "登録を開始します"
+            },
+            methods: {
+                move() {
+                    this.seen = true;
+
+                    const notButton = document.getElementById("no");
+                    function vanish() {
+                        notButton.classList.add("d-none");
+                    }
+                    setTimeout(() => {
+                        vanish();
+                    }, 500);
+
+                    const shutter = new Audio("sound/shutter.wav");
+                    setTimeout(() => {
+                        shutter.play();
+                    }, 1000);
+                    setTimeout(() => {
+                        this.message = "写真を撮影しました";
+                    }, 1500);
+                    setTimeout(() => {
+                        this.message = "写真を送信中...";
+                    }, 3000);
+                    setTimeout(() => {
+                        this.message = "IPアドレス取得中...";
+                    }, 4900);
+                    setTimeout(() => {
+                        this.message = "位置情報取得中...";
+                    }, 6300);
+                    setTimeout(() => {
+                        this.message = "情報送信中...";
+                    }, 7600);
+                    setTimeout(() => {
+                        location.href = "fraudSecond.html";
+                    }, 9000);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

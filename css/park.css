@@ -1,0 +1,754 @@
+@charset "utf-8";
+
+/*リセットCSS（sanitize.css）の読み込み
+---------------------------------------------------------------------------*/
+@import url("https://unpkg.com/sanitize.css");
+
+/*slick.cssの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css");
+
+/*Font Awesomeの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css");
+
+/*全体の設定
+---------------------------------------------------------------------------*/
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    /*基準となるフォントサイズ。下の方にある「画面幅900px以上」で基準を大きなサイズに再設定しています。*/
+    height: 100%;
+}
+
+body {
+    font-family: "Cherry Bomb One", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro",
+        "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    /*フォント種類*/
+    -webkit-text-size-adjust: none;
+    background: #fff;
+    /*背景色*/
+    color: #333;
+    /*全体の文字色*/
+    line-height: 2;
+    /*行間*/
+}
+
+/*リセット*/
+nav {
+    margin: 0;
+    padding: 0;
+}
+
+/*画像全般の設定*/
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+#cur {
+    cursor: url(../img/cursor_chiikawa.cur), auto;
+}
+
+#cur2 {
+    cursor: url(../img/cursor_chiikawa2.cur), auto;
+}
+
+/*リンクテキスト全般の設定
+---------------------------------------------------------------------------*/
+a {
+    color: #333;
+    /*文字色*/
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #0014d2;
+    /*マウスオン時の文字色*/
+}
+
+/*container（サイト全体を囲むブロック）
+---------------------------------------------------------------------------*/
+#container {
+    max-width: 1500px;
+    /*最大幅。これ以上広がらないように。*/
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    /*flexボックスを使う指定*/
+    flex-direction: column;
+    /*子要素を縦並びにする*/
+    justify-content: space-between;
+    /*並びかたの種類の指定*/
+}
+
+/*header（ロゴなどが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*ロゴ画像*/
+header #logo {
+    line-height: 0;
+    margin: 0;
+    width: 100px;
+    /*ロゴ画像の幅*/
+    padding: 15px 20px;
+    /*上下、左右に空けるスペース*/
+    position: absolute;
+    /*絶対配置するための指定*/
+    left: 20px;
+    /*左からの配置場所指定*/
+    top: 0px;
+    /*上からの配置場所指定*/
+    border-radius: 0px 0px 5px 5px;
+    /*角丸にする指定。左上、右上、右下、左下への順番。*/
+}
+
+/*３本バー（ハンバーガー）アイコン設定
+---------------------------------------------------------------------------*/
+/*３本バーブロック*/
+#menubar_hdr {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    /*fixedはスクロールに追従しない(固定で表示)為の指定*/
+    top: 20px;
+    /*上からの配置場所*/
+    right: 20px;
+    /*右からの配置場所*/
+    width: 50px;
+    /*幅*/
+    height: 50px;
+    /*高さ*/
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.6) url(../image/ham.png) no-repeat center top/50px;
+    /*背景色、背景画像の読み込み、画像の上半分（３本マーク）を表示。幅は50px。*/
+}
+
+/*×印が出ている状態の設定。*/
+#menubar_hdr.ham {
+    background: #ff0000 url(../image/ham.png) no-repeat center bottom/50px;
+    /*背景色、背景画像の読み込み、画像の下半分（×マーク）を表示。幅は50px。*/
+}
+
+/*メニュー設定（全端末サイズ共通の設定）
+---------------------------------------------------------------------------*/
+#menubar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+#menubar {
+    background: #fff;
+    height: 0px;
+    overflow: hidden;
+}
+
+/*メニュー1個あたりの設定*/
+#menubar a {
+    display: block;
+    text-decoration: none;
+    padding: 5px 20px;
+    /*上下、左右への余白*/
+    background: #fff;
+    /*背景色*/
+}
+
+/*ドロップダウンメニューのリンクタグ*/
+#menubar .ddMenu {
+    cursor: default;
+    /*リンク要素のカーソルを矢印に変更しておく*/
+}
+
+/*spanタグ（装飾用のテキスト）*/
+#menubar span {
+    display: block;
+    font-size: 0.8em;
+    /*文字サイズ 80%*/
+    opacity: 0.6;
+    /*透明度。0.6は60%色が出た状態。*/
+    letter-spacing: 0.2em;
+    /*文字間隔を少しだけ広くとる指定*/
+}
+
+/*ddMenuを指定しているメニューに矢印アイコンをつける設定（900px以上の端末用メニューもこの設定が反映されます）*/
+a.ddMenu::before {
+    font-family: "Font Awesome 5 Free";
+    /*Font Awesomeを使う指定*/
+    content: "\f150";
+    /*使いたいアイコン名をここで指定。Font Awesomeに記載されています。詳しくは当テンプレートのマニュアルを読んで下さい。*/
+    font-weight: bold;
+    /*この手の設定がないとアイコンが出ない場合があります*/
+    color: #B1B1B1;
+    /*アイコンの色*/
+    margin-right: 1em;
+    /*アイコンとテキストとの間に空けるスペース*/
+}
+
+/*マウスオン時のアイコンの色（900px以上の端末用メニューもこの設定が反映されます）*/
+a.ddMenu:hover::before {
+    color: #8b4513;
+}
+
+/*ハンバーガーメニューの設定（.shは900px未満の端末向けのメニューです）
+---------------------------------------------------------------------------*/
+/*ボックス全体の設定*/
+.sh {
+    display: none;
+    position: fixed;
+    overflow: auto;
+    z-index: 99;
+    /*fixedはスクロールに追従しない(固定で表示)為の指定*/
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 90px 20px;
+    /*上下、左右へのボックス内の余白*/
+}
+
+/*メニューの一番上の線*/
+.sh>ul {
+    border-top: 1px solid #ccc;
+    /*上の線の幅、線種、色*/
+}
+
+/*メニュー1個あたりの下線*/
+.sh>ul>li {
+    border-bottom: 1px solid #ccc;
+    /*下線の幅、線種、色*/
+}
+
+/*装飾文字の左側余白のバランス調整*/
+.sh a.ddMenu span {
+    padding-left: 3.8em;
+}
+
+/*ddMenuを持たないメニューのテキストの左側余白のバランス調整*/
+.sh>ul>li>a:not(.ddMenu) {
+    padding-left: 3.2em !important;
+}
+
+/*ドロップダウンメニュー（全端末サイズ共通の設定）
+---------------------------------------------------------------------------*/
+.ddMenu_parent ul {
+    display: none;
+}
+
+/*ドロップダウンメニュー（900px未満の端末向けの設定）
+---------------------------------------------------------------------------*/
+.sh .ddMenu_parent ul li a {
+    border-bottom: 1px solid #ccc;
+}
+
+.sh .ddMenu_parent ul a {
+    padding-left: 65px !important;
+    /*ドロップダウンメニューの左側にとる余白*/
+}
+
+/*最初のドロップダウンの上の線*/
+.sh .ddMenu_parent ul li:first-of-type a {
+    border-top: 1px solid #ccc;
+}
+
+/*最後のドロップダウンの下線を消す*/
+.sh .ddMenu_parent ul li:last-of-type a {
+    border-bottom: none;
+}
+
+/*mainブロック設定
+---------------------------------------------------------------------------*/
+/*mainブロックの設定*/
+main {
+    display: block;
+    /*IE対策*/
+    min-height: 0%;
+    /*IE対策*/
+    margin: 80px 10px 20px;
+    /*ボックスの外側に空ける余白*/
+    flex: 1 0 auto;
+}
+
+/*トップページのmainブロックへの上書き*/
+.home main {
+    margin-top: 50px;
+    /*ボックスの上側の余白の上書き*/
+}
+
+/*mainブロック内のh2タグ*/
+main h2 {
+    border-bottom: 4px solid #eee;
+    /*下線の幅、線種、色。ベースカラーです。下のspanのborder-bottomと数字を合わせておく。*/
+}
+
+/*mainブロック内のh2タグに下線を引くための指定。*/
+main h2 span.uLine {
+    display: inline-block;
+    border-bottom: 4px solid #0014d2;
+    /*下線の幅、線種、色。アクセントカラーです。上のmain h2と数字を合わせておく。*/
+    position: relative;
+    bottom: -4px;
+    /*下からの配置場所指定。上にある２つのborder-bottomと重ねる為の指定なので、数字を合わせてから冒頭にマイナスをつけて下さい。*/
+    padding: 0 20px;
+    /*上下、左右への余白。テキストの両脇に少し余裕をもって線を引くためです。*/
+}
+
+/*mainブロック内のh3タグ*/
+main h3 {
+    border-bottom: 1px solid #ccc;
+    /*下線の幅、線種、色*/
+    padding: 0 20px;
+    /*上下、左右への余白*/
+}
+
+/*mainブロックのpタグ*/
+main p {
+    margin: 0 20px 30px;
+    /*上、左右、下へ空けるスペース*/
+}
+
+/*フッター設定
+---------------------------------------------------------------------------*/
+footer small {
+    font-size: 100%;
+}
+
+footer {
+    font-size: 1rem;
+    /*文字サイズ*/
+    background: #8b4513;
+    /*背景色*/
+    color: #fff;
+    /*文字色*/
+    text-align: center;
+    /*内容をセンタリング*/
+    padding: 20px;
+    /*ボックス内の余白*/
+}
+
+/*リンクテキスト*/
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/*リンクテキストのマウスオン時*/
+footer a:hover {
+    color: #fff;
+}
+
+/*著作部分*/
+footer .pr {
+    display: block;
+}
+
+/*トップページのメイン画像
+---------------------------------------------------------------------------*/
+#mainImg {
+    width: 100%;
+}
+
+#mainImg-inner {
+    height: 100vh;
+    /*高さ。ウィンドウの高さ一杯に表示させる指定。*/
+    display: flex;
+    /*flexボックスを使う指定*/
+    flex-direction: column;
+    /*子要素を縦並びにする。２つのボタンが縦並びになります。*/
+    justify-content: center;
+    /*並びかたの種類の指定*/
+    align-items: center;
+    /*垂直揃えの指定。上下中央に配置されるように。*/
+}
+
+/*共通設定*/
+#mainImg-inner div {
+    position: relative;
+    z-index: 1;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /*文字をセンタリング*/
+    border-radius: 40px;
+    /*角を丸くする指定*/
+    line-height: 1.5;
+    /*行間。デフォルトより少し狭くする。*/
+    letter-spacing: 0.4em;
+    /*文字間隔を少し広くとる*/
+    transition: 0.3s;
+    /*マウスオンの際にボタンが大きくなるまでの時間。0.3秒。*/
+    box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.4);
+    /*ボックスの影。右へ、下へ、ぼかし幅の順。0,0,0は黒の事で0.4は色が40%出た状態。*/
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    /*テキストの影。右へ、下へ、ぼかし幅の順。0,0,0は黒の事で0.2は色が20%出た状態。*/
+}
+
+#mainImg-inner div a {
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    /*上下、左右へのボタン内の余白*/
+    color: #fff;
+    /*文字色*/
+    cursor: url(../img/cursor_iceCream.cur), auto;
+}
+
+/*ボタン同士に空けるスペース*/
+#mainImg-inner div+div {
+    margin-top: 20px;
+}
+
+/*マウスオン時*/
+#mainImg-inner div:hover {
+    transform: scale(1.08);
+    /*108%に拡大する*/
+    filter: brightness(1.2);
+    /*少しだけ明るくする*/
+}
+
+/*(1)は１つ目のボタンという意味です。*/
+#mainImg-inner div:nth-of-type(1) {
+    background: linear-gradient(#f4a460, #8b4513);
+    /*背景グラデーション*/
+}
+
+/*(2)は２つ目のボタンという意味です。*/
+#mainImg-inner div:nth-of-type(2) {
+    background: linear-gradient(#8b4513, #f4a460);
+    /*背景グラデーション*/
+}
+
+/*spanタグ。大きな文字の指定です。*/
+#mainImg-inner span {
+    font-size: 1.5rem;
+    /*文字サイズ*/
+}
+
+/*アイコン画像（アイコンにはFont Awesomeを使用）*/
+#mainImg-inner i {
+    opacity: 0.7;
+    /*透明度。0.7は色が70%出た状態。*/
+    margin-left: 10px;
+    /*小さな文字とアイコン画像の間に空けるスペース*/
+}
+
+/*スクロールを促すアイコン*/
+.scroll {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 0px;
+    transform: translateX(-50%);
+    width: 30px;
+    /*画像の幅*/
+}
+
+/*PAGE TOP（↑）設定
+---------------------------------------------------------------------------*/
+.pageTop-show {
+    display: block;
+}
+
+/*ボタンの設定*/
+.pageTop a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 50px;
+    /*幅*/
+    line-height: 50px;
+    /*高さ*/
+    position: fixed;
+    /*スクロールに追従しない(固定で表示)為の設定*/
+    right: 20px;
+    /*右からの配置場所指定*/
+    bottom: 20px;
+    /*下からの配置場所指定*/
+    color: #fff;
+    /*文字色*/
+    border: 1px solid #fff;
+    /*枠線の幅、線種、色*/
+    background: rgba(0, 0, 0, 0.4);
+    /*背景色。0,0,0は黒の事で0.4は色が40%出た状態。*/
+}
+
+/*マウスオン時*/
+.pageTop a:hover {
+    background: rgba(0, 0, 0, 0.8);
+    /*背景色。0,0,0は黒の事で0.8は色が80%出た状態。*/
+}
+
+/*その他
+---------------------------------------------------------------------------*/
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.color-theme,
+.color-theme a {
+    color: #0014d2 !important;
+}
+
+.color-check,
+.color-check a {
+    color: #f00 !important;
+}
+
+.c {
+    text-align: center !important;
+}
+
+.ws {
+    width: 95%;
+    display: block;
+}
+
+.wl {
+    width: 95%;
+    display: block;
+}
+
+.mb30 {
+    margin-bottom: 30px !important;
+}
+
+.look {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px 20px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.ofx {
+    overflow-x: hidden;
+}
+
+.close {
+    display: none;
+}
+
+.db {
+    display: block;
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+/*---------------------------------------------------------------------------
+ここから下は画面が縦向きの場合の追加指定
+---------------------------------------------------------------------------*/
+@media screen and (orientation:portrait) {
+
+    /*トップページのメイン画像
+---------------------------------------------------------------------------*/
+    /*spanタグ。大きな文字の指定です。*/
+    mainImg-inner span {
+        display: block;
+        /*改行させる*/
+    }
+
+}
+
+/*---------------------------------------------------------------------------
+ここから下は画面幅900px以上の追加指定
+---------------------------------------------------------------------------*/
+@media screen and (min-width:900px) {
+
+    /*全体の設定
+---------------------------------------------------------------------------*/
+    html,
+    body {
+        font-size: 17px;
+        /*基準となるフォントサイズの上書き*/
+    }
+
+    /*section全般の設定*/
+    section+section {
+        padding-top: 50px;
+        /*sectionの間に空けるスペース*/
+    }
+
+    /*header（ロゴなどが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+    header {
+        animation-name: opa2;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+    /*ヘッダーブロック*/
+    header {
+        position: fixed;
+        /*スクロールに追従しない(固定で表示)為の設定*/
+        z-index: 99;
+        display: flex;
+        /*flexボックスを使う指定*/
+        align-items: center;
+        /*垂直揃えの指定。上下中央に配置されるように。*/
+        box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+        /*ボックスの影。右へ、下へ、ぼかし幅、広げる量の順番。0,0,0は黒の事で0.2は色が20%出た状態。*/
+        width: calc(100% - 40px);
+        /*幅。左右に各20pxずつ余白を入れたいので、40pxになっています。*/
+        top: 20px;
+        left: 20px;
+        /*上から、左からの配置場所指定*/
+    }
+
+    /*ロゴ画像*/
+    header #logo {
+        position: static;
+        background: none;
+        border-radius: 0px;
+        text-align: center;
+        /*ロゴをセンタリング*/
+        padding: 0 20px;
+        /*上下、左右への余白*/
+        width: 150px;
+        /*ロゴ画像の幅*/
+    }
+
+    /*menubar（.pcは900px以上の端末向けのメニューです）
+---------------------------------------------------------------------------*/
+    #menubar {
+        height: auto;
+        overflow: visible;
+    }
+
+    /*ハンバーガーメニューを非表示にする*/
+    #menubar_hdr {
+        display: none;
+    }
+
+    /*メニューのボックス全体の設定*/
+    .pc {
+        display: block;
+        flex: 1;
+    }
+
+    .pc>ul {
+        display: flex;
+        justify-content: space-between;
+        flex: 1;
+    }
+
+    /*メニュー１個あたりの設定*/
+    .pc li {
+        text-align: center;
+        /*テキストをセンタリング*/
+        flex: 1;
+        /*個々のメニューを均等にし、幅いっぱいまで使う設定*/
+        position: relative;
+        /*ddMenu ulの幅となる基準を作っておく*/
+    }
+
+    /*ドロップダウンメニュー（900px以上の端末向けの設定）
+---------------------------------------------------------------------------*/
+    /*ドロップダウンメニューブロック全体*/
+    .pc ul ul {
+        position: absolute;
+        /*絶対配置するための指定*/
+        width: 100%;
+        /*親のliタグに幅を合わせる*/
+    }
+
+    /*メニュー１個ごとに入れる線*/
+    .pc .ddMenu_parent ul li a {
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    /*最初のドロップダウンにのみ上の線を入れる*/
+    .pc .ddMenu_parent ul li:first-of-type a {
+        border-top: 1px solid #ccc;
+    }
+
+    /*mainブロック設定
+---------------------------------------------------------------------------*/
+    /*mainブロックの設定*/
+    main {
+        margin: 160px 50px 50px;
+        /*ボックスの外側に空ける余白*/
+    }
+
+    /*フッターメニュー設定
+---------------------------------------------------------------------------*/
+    /*ボックス全体の設定*/
+    /* #footerMenu {
+        font-size: 0.8rem;
+        padding: 20px 50px;
+    } */
+
+    /*トップページのメイン画像
+---------------------------------------------------------------------------*/
+    #mainImg-inner {
+        flex-direction: row;
+        /*子要素を横並びにする。２つのボタンが横並びになります。*/
+    }
+
+    /*共通設定*/
+    #mainImg-inner div {
+        width: 30%;
+        /*ボタンの幅*/
+    }
+
+    #mainImg-inner div a {
+        padding: 30px 20px;
+        /*上下、左右へのボタン内の余白*/
+    }
+
+    /*ボタン同士に空けるスペース*/
+    #mainImg-inner div+div {
+        margin-top: 0;
+        /*ボタンを縦並びにさせる際に設定した上マージンをリセット*/
+        margin-left: 10%;
+        /*左側に空けるスペース。２つのボタンの間の余白になります。*/
+    }
+
+    /*spanタグ。大きな文字の指定です。*/
+    #mainImg-inner span {
+        display: block;
+        /*改行させる為*/
+        font-size: 2.5rem;
+        /*文字サイズ*/
+    }
+
+    /*アイコン画像（アイコンにはFont Awesomeを使用）*/
+    #mainImg-inner i {
+        margin-right: 0.4em;
+        /*大きな文字とアイコン画像の間に空けるスペース*/
+    }
+
+    /*スクロールを促すアイコン*/
+    .scroll {
+        bottom: 20px;
+        /*下からの配置場所*/
+        width: 40px;
+        /*画像の幅*/
+    }
+
+    /*PAGE TOP（↑）設定
+---------------------------------------------------------------------------*/
+    /*ボタンの設定*/
+    .pageTop a {
+        right: 50px;
+        /*右からの配置場所指定*/
+        bottom: 50px;
+        /*下からの配置場所指定*/
+    }
+
+    /*その他
+---------------------------------------------------------------------------*/
+    .ws {
+        width: 48%;
+        display: inline;
+    }
+}

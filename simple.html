@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SIMPLE</title>
+    <link rel="icon" href="image/logoIcon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="詰め込みシンプル集です。">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Stick&display=swap');
+
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+        width: 100%;
+        font-family: sans-serif;
+    }
+
+    p {
+        line-height: 2;
+    }
+
+    /* デバイスのアニメーション機能をオフにしている場合は、アニメーションを再生しません */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation: none !important;
+        }
+    }
+
+    .parent {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 10% auto 0;
+    }
+
+    .parent svg {
+        width: 20px;
+        height: 20px;
+        offset-path: circle(5px at center);
+        animation: spin 4s infinite linear, expandCircle 2s infinite alternate ease-out;
+        animation-composition: accumulate, replace;
+        position: absolute;
+        inset: 0;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        0% {
+            offset-distance: 0;
+        }
+
+        100% {
+            offset-distance: 100%;
+        }
+    }
+
+    @keyframes expandCircle {
+        0% {
+            offset-path: circle(5px at center);
+        }
+
+        100% {
+            offset-path: circle(100px at center);
+        }
+    }
+
+    svg:nth-child(2) {
+        offset-distance: 20%;
+    }
+
+    svg:nth-child(3) {
+        offset-distance: 40%;
+    }
+
+    svg:nth-child(4) {
+        offset-distance: 60%;
+    }
+
+    svg:nth-child(5) {
+        offset-distance: 80%;
+    }
+
+    /*  */
+
+    .announceText {
+        color: #222;
+        font-size: 1.5rem;
+    }
+
+    /* ページ下部のナビゲーションのスタイル */
+    .navigation {
+        margin: 50px;
+    }
+
+    .navigation ul {
+        list-style: none;
+        color: #aac;
+    }
+
+    .navigation li {
+        margin-bottom: 12px;
+    }
+
+    .navigation a {
+        color: royalblue;
+        text-underline-offset: 4px;
+    }
+
+    .navigation a:visited {
+        color: #7050ff;
+    }
+
+    .navigation span {
+        display: inline-block;
+        margin-right: 16px;
+    }
+
+    .navigation_currentPage {
+        color: #222;
+    }
+
+    .mobileAlert {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .mobileAlert {
+            display: block;
+            color: #ff2255;
+            margin-bottom: 32px;
+        }
+    }
+
+    /* ------------ 画面右下の星 ------------ */
+    .star {
+        position: fixed;
+        bottom: 20px;
+        right: 0;
+        z-index: 10;
+        width: 100px;
+        height: 100px;
+        background: white;
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        /* 水玉ver. */
+        /* clip-path: path("m58,70.879c0,16.083-12.984,29.121-29,29.121S0,86.962,0,70.879,29,0,29,0c0,0,29,54.797,29,70.879Z"); */
+    }
+
+    .star_inner {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-radial-gradient(circle closest-side, rgba(200, 255, 255, 0.55), rgba(150, 220, 250, 0.55) 12%, rgba(22, 202, 202, 0.55) 22%, rgba(155, 255, 255, 0.55) 32%);
+        /* 背景色　↑グラデーション　↓単色 */
+        /* background: royalblue; */
+        transform-origin: top;
+        /* scroll変化　↑上から満ちる　↓下から満ちる */
+        /* transform-origin: bottom; */
+        /* 下部を変形の基準にする */
+        animation: grow-progress linear;
+        animation-timeline: scroll();
+    }
+
+    /* 垂直方向にスケールを変えるキーフレーム */
+    @keyframes grow-progress {
+        from {
+            scale: 1 0;
+        }
+
+        to {
+            scale: 1 1;
+        }
+    }
+
+    /* ------------ ヒーローエリア ------------ */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-color: #2c2c2c;
+    }
+
+    .hero_title {
+        position: fixed;
+        top: 30%;
+        width: 100%;
+        font-size: 3rem;
+        text-align: center;
+        animation: scale-down linear both;
+        animation-timeline: view();
+        animation-range: contain 70% contain 100%;
+    }
+
+    @keyframes scale-down {
+        to {
+            scale: 0.7;
+            opacity: 0;
+        }
+    }
+
+    .hero_layer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-size: cover;
+    }
+
+    .hero_layer__back {
+        bottom: 0;
+        height: 30vh;
+        background-image: url("./imgs/back.svg");
+        animation: parallax-image linear both;
+        animation-timeline: view();
+        animation-range: contain 0% exit 100%;
+    }
+
+    @keyframes parallax-image {
+        from {
+            translate: 0 -13vh;
+        }
+    }
+
+    /* 画像が足りない分を書き足し */
+    .hero_layer__back::after {
+        content: "";
+        position: absolute;
+        bottom: -20vh;
+        width: 100%;
+        height: 20vh;
+        background-color: #0d2a9f;
+    }
+
+    .hero_layer__front {
+        bottom: -20vh;
+        height: 40vh;
+        background-image: url("./imgs/front.svg");
+        animation: parallax-image-front linear both;
+        animation-timeline: view();
+        animation-range: contain 0% exit 100%;
+    }
+
+    @keyframes parallax-image-front {
+        to {
+            translate: 0 -5vh;
+        }
+    }
+
+    /* 画像が足りない分を書き足し */
+    /* .hero_layer__front::after {
+        content: "";
+        position: absolute;
+        bottom: -10vh;
+        width: 100%;
+        height: 10vh;
+        background-color: #0d2a9f;
+    } */
+
+    /* ------------------------ */
+    .wrapper {
+        background-color: #0d2a9f;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: clip;
+    }
+
+    /* ------------ 水泡：opacity クリオネ：offset ------------ */
+    .sectionSea {
+        position: relative;
+        padding: 300px 1vw;
+        background-color: #0d2a9f;
+        color: white;
+    }
+
+    /* 人魚 */
+    .offsetElement {
+        position: absolute;
+        width: 200px;
+        height: 139px;
+        background-image: url("imgs/mermaid.gif");
+        offset-path: circle(240px at center);
+        offset-rotate: auto 45deg;
+        animation: move 40s linear infinite;
+    }
+
+    @keyframes move {
+        to {
+            offset-distance: 100%;
+        }
+    }
+
+    /* 水泡 */
+    .sectionSea::before,
+    .sectionSea::after {
+        position: absolute;
+        top: 5%;
+        width: 20vw;
+        height: 90%;
+        content: "";
+        background-image: url("./imgs/polka_dots.webp");
+        background-size: contain;
+        mix-blend-mode: plus-lighter;
+        animation: fade-in linear both;
+        animation-timeline: view();
+        animation-range: cover 45% cover 60%;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+    }
+
+    .sectionSea::before {
+        left: -18vw;
+    }
+
+    .sectionSea::after {
+        right: -18vw;
+        scale: -1 -1;
+    }
+
+    .sectionSea p {
+        margin: 0 auto 100px;
+        max-width: 800px;
+    }
+
+    .angel {
+        position: absolute;
+        top: 20%;
+        left: -120px;
+
+        /* offsetプロパティの紹介記事： https://ics.media/entry/230327/ */
+        offset-path: path("m16.335.397C8.884,6.095-1.144,31.39.729,36.776c6.402,18.409,34.762,21.381,37.982,33.361,8.471,31.513-18.708,30.613-24.591,36.49-10.986,10.974-.465,49.54,16.065,68.698,30.176,34.972,17.15,70.578-23.667,93.591");
+        offset-rotate: 0deg;
+
+        animation: swim-angel linear both;
+        animation-timeline: view();
+        animation-range: cover 0% exit 250%;
+    }
+
+    @keyframes swim-angel {
+        to {
+            offset-distance: 100%;
+        }
+    }
+
+    .angel__reverse {
+        top: unset;
+        left: unset;
+        right: -120px;
+        bottom: 40%;
+        offset-path: path("m16.335.397C8.884,6.095-1.144,31.39.729,36.776c6.402,18.409,34.762,21.381,37.982,33.361,8.471,31.513-18.708,30.613-24.591,36.49-12.555,12.542-2.606,67.337,25.866,72.92");
+        offset-rotate: 20deg;
+        scale: -1 1;
+    }
+
+    /* ------------ jd,puma,clover：sticky & translate & clip-path ------------ */
+    .sectionPin {
+        width: 100%;
+        height: 200vh;
+        /* スクロール長め */
+    }
+
+    .pin_text {
+        width: calc(50vw - 100px);
+    }
+
+    .pin_sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-x: clip;
+        background-image: linear-gradient(#16caca, #d4f4ff, #16caca);
+        view-timeline: --sticky-timeline;
+        /* 画像マスクアニメーション用のタイムラインを定義 */
+    }
+
+    .pin_wrapper {
+        display: flex;
+        gap: 100px;
+        flex-direction: row;
+        align-items: center;
+        width: 200vmax;
+        height: 100%;
+
+        animation: slide-image linear both;
+        animation-timeline: view();
+        animation-range: contain;
+        /* = contain 0% contain 100% */
+    }
+
+    @keyframes slide-image {
+        from {
+            translate: 50vw 0;
+        }
+
+        to {
+            translate: -550px 0;
+        }
+    }
+
+    .image {
+        width: 300px;
+        height: 300px;
+        animation: reveal-gem linear both;
+        animation-timeline: --sticky-timeline;
+        /* .pin_stickyに定義したタイムラインを指定 */
+        animation-range: contain 55% contain 70%;
+        /* sticky中の「縦」のスクロール量で判定 */
+    }
+
+    /* 円→（角丸四角形を経由）→正方形 にマスクの形状を変化させるキーフレーム */
+    @keyframes reveal-gem {
+        from {
+            clip-path: inset(30% round 20%);
+        }
+
+        to {
+            clip-path: inset(0);
+        }
+    }
+
+    .image__2 {
+        animation-range: contain 65% contain 80%;
+    }
+
+    .image__3 {
+        animation-range: contain 75% contain 90%;
+    }
+
+    /* ------------ 紙吹雪のパララックス ------------ */
+    .sectionRainbow::before,
+    .sectionRainbow::after {
+        position: absolute;
+        top: 5%;
+        width: 20vw;
+        height: 90%;
+        content: "";
+        background-image: url("./imgs/confetti.webp");
+        background-size: contain;
+        /* 画像を明るくする */
+        /* mix-blend-mode: plus-lighter; */
+        animation: fade-in linear both;
+        animation-timeline: view();
+        animation-range: cover 55% cover 60%;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+    }
+
+    .sectionRainbow::before {
+        left: 4vw;
+    }
+
+    .sectionRainbow::after {
+        right: 4vw;
+        scale: -1 -1;
+    }
+
+    .sectionRainbow {
+        position: relative;
+        width: 100%;
+        padding: 300px 1vw;
+        background-image: linear-gradient(#ba5555, #ba9555, #bab555, #55ba66, #55baba, #5566ba, #9c55ba);
+    }
+
+    .sectionRainbow p {
+        margin: 0 auto 40px;
+        max-width: 800px;
+        font-family: "Potta One", serif;
+        font-size: x-large;
+        /* font-family: "Stick", serif; */
+    }
+
+    /* scroll_up ｜下から上へ出現 */
+    .scroll_up {
+        transition: 0.8s ease;
+        transform: translateY(300px);
+        opacity: 0;
+    }
+
+    .scroll_up.on {
+        transform: translateY(0);
+        opacity: 1;
+        margin-top: 10%;
+        font-size: 3rem;
+    }
+
+    /* scroll_left ｜左から出現 */
+    .scroll_left {
+        transition: 0.8s ease-in-out;
+        transform: translateX(-300px);
+        opacity: 0;
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+
+    .scroll_left.on {
+        opacity: 1;
+        filter: alpha(opacity=100);
+        opacity: 1;
+        transform: translateX(0);
+        /* アニメーションの開始を0.5秒遅らせる */
+        transition-delay: .5s;
+    }
+
+    /* scroll_right ｜右から出現 */
+    .scroll_right {
+        transition: 0.8s ease-in-out;
+        transform: translateX(300px);
+        opacity: 0;
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+
+    .scroll_right.on {
+        opacity: 1;
+        filter: alpha(opacity=100);
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .dropGem {
+        position: absolute;
+        width: 88px;
+        height: 124px;
+        background-image: url("./imgs/jd.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: parallax-drop linear both;
+        animation-timeline: view();
+        animation-range: cover;
+        /* = cover 0% cover 100% */
+    }
+
+    @keyframes parallax-drop {
+        from {
+            translate: 0 200px;
+        }
+
+        to {
+            translate: 0 -200px;
+        }
+    }
+
+    .dropGem__item2 {
+        background-image: url("./imgs/clover.svg");
+    }
+
+    .dropGem__item3 {
+        background-image: url("./imgs/puma.svg");
+    }
+
+    .dropGem__medium {
+        scale: 0.8;
+        animation-range: entry -150% exit 250%;
+        /* 開始終了位置をオーバーにして、動く量を少なく見せています。移動量を調整した別の@keyframesを作って使用する方法も○です */
+    }
+
+    .dropGem__small {
+        scale: 0.6;
+        animation-range: entry -800% exit 900%;
+    }
+
+    .dropGem__1 {
+        top: 20%;
+        left: 15%;
+    }
+
+    .dropGem__2 {
+        bottom: 20%;
+        left: 10%;
+    }
+
+    .dropGem__3 {
+        top: 15%;
+        right: 20%;
+    }
+
+    .dropGem__4 {
+        top: 50%;
+        right: 15%;
+    }
+
+    .dropGem__5 {
+        bottom: 15%;
+        right: 25%;
+    }
+
+    /* ------------ 空：sticky & clip-path ------------ */
+    .sectionSky {
+        position: relative;
+        width: 100%;
+        height: 170vh;
+        background-color: #d4f4ff;
+    }
+
+    @keyframes reveal-sky {
+        from {
+            clip-path: ellipse(60px 80px);
+        }
+
+        to {
+            clip-path: ellipse(60% 130%);
+        }
+    }
+
+    .sky_image {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        position: sticky;
+        top: 0;
+        animation: reveal-sky linear both;
+        animation-timeline: view();
+        animation-range: contain 0% contain 70%;
+        /* ↑ https://scroll-driven-animations.style/tools/view-timeline/ranges/#range-start-name=contain&range-start-percentage=0&range-end-name=contain&range-end-percentage=70&view-timeline-axis=block&view-timeline-inset=0&subject-size=taller&subject-animation=scale-up&interactivity=clicktodrag&show-areas=yes&show-fromto=yes&show-labels=yes */
+    }
+
+    .sky_text {
+        position: relative;
+        background-color: black;
+        color: white;
+        line-height: 2;
+        max-width: 24rem;
+        padding: 1rem 2rem;
+        margin-left: 80px;
+        font-family: "Stick", serif;
+        font-size: x-large;
+    }
+
+    /*  */
+    .neon {
+        font-family: "Stick", serif;
+        color: white;
+        transition: 1s;
+    }
+
+    .neon:hover {
+        text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 20px #fff,
+            0 0 40px #b2ebf5,
+            0 0 80px #b2ebf5,
+            0 0 90px #b2ebf5
+    }
+
+    .wave-text {
+        font-family: "Potta One", serif;
+        font-size: xx-large;
+        text-anchor: start;
+        dominant-baseline: hanging;
+    }
+
+    .wave-fill {
+        fill: royalblue;
+    }
+
+    .wave-mbm {
+        mix-blend-mode: multiply;
+    }
+
+    .stick {
+        font-family: "Stick", serif;
+    }
+
+    .potta {
+        font-family: "Potta One", serif;
+        font-size: xx-large;
+    }
+
+    /*マトリックス風（js）*/
+    canvas {
+        background: #101010;
+        box-shadow: 0 0 0 2px #191919;
+        /* display: block; */
+        left: 50%;
+        /* margin: -100px 0 0 -200px; */
+        /* position: absolute; */
+        top: 50%;
+    }
+</style>
+
+<body>
+    <div class="star"><span class="star_inner"></span></div>
+
+    <div class="hero">
+        <p class="mobileAlert">PCサイズ画面での閲覧を推奨しております。</p>
+
+        <!-- <h1 class="hero_title neon">Only CSS<br>Scroll-driven Animations<br>Sample</h1> -->
+        <h1 class="hero_title neon">毎日がエブリデイ</h1>
+        <div class="hero_layer hero_layer__back"></div>
+        <div class="hero_layer hero_layer__front"></div>
+    </div>
+
+    <div class="wrapper">
+        <section class="sectionSea">
+            <div class="offsetElementWrapper">
+                <div class="offsetElement"></div>
+            </div>
+            <p class="potta">
+                女「どうしたの？&emsp;深刻そうな顔して」<br>
+                男「ちょっと悩んでんだ。ほっといてくれよ」<br>
+                女「ふーん。話変わるけどさぁ、髪薄くなった？」<br>
+            </p>
+            <svg viewBox="0 0 360 90">
+                <defs>
+                    <path id="svgWave-path"
+                        d="M -40 10 Q -30 20 -20 10 Q -10  0 0 10 Q 10 20 20 10 Q 30  0 40 10 Q 50 20 60 10 Q 70 20 80 10 V 94 H -40 Z">
+                    </path>
+                    <pattern id="svgWave-pt-a" x="0" y="5" width="40" height="100" patternUnits="userSpaceOnUse"
+                        patternTransform="scale(5,2)">
+                        <use class="wave-fill" href="#svgWave-path" />
+                        <animate attributeName="x" dur="2s" repeatCount="indefinite" values="0; -40" />
+                    </pattern>
+                    <pattern id="svgWave-pt-b" x="0" y="5" width="40" height="100" patternUnits="userSpaceOnUse"
+                        patternTransform="scale(5,2)">
+                        <use class="wave-fill" href="#svgWave-path" />
+                        <animate attributeName="x" dur="2.5s" repeatCount="indefinite" values="0; -40" />
+                    </pattern>
+                    <pattern id="svgWave-pt-c" x="0" y="5" width="40" height="100" patternUnits="userSpaceOnUse"
+                        patternTransform="scale(7,3)">
+                        <use class="wave-fill" href="#svgWave-path" />
+                        <animate attributeName="x" dur="3s" repeatCount="indefinite" values="0; -40" />
+                    </pattern>
+                    <text id="svgWave-text" class="wave-text" x="0" y="10">男「話変わってねーよ」</text>
+                    <mask id="svgWave-text-mask">
+                        <use x="0" y="0" xlink:href="#svgWave-text" fill="#fff" />
+                    </mask>
+                </defs>
+
+                <use class="wave-mbm wave-fill" x="0" y="0" xlink:href="#svgWave-text" />
+                <rect class="wave-mbm" x="0" y="0" width="720" height="100" fill="url(#svgWave-pt-a)"
+                    mask="url(#svgWave-text-mask)"></rect>
+                <rect class="wave-mbm" x="0" y="0" width="720" height="100" fill="url(#svgWave-pt-b)"
+                    mask="url(#svgWave-text-mask)"></rect>
+                <rect class="wave-mbm" x="0" y="0" width="720" height="100" fill="url(#svgWave-pt-c)"
+                    mask="url(#svgWave-text-mask)"></rect>
+            </svg>
+            <div class="parent">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="64" height="64" version="1.0"
+                    viewBox="0 0 128 128">
+                    <g>
+                        <path fill="#ffcb02"
+                            d="M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z" />
+                        <path fill="#ff9e02"
+                            d="M65.32 29.05c7.65 19.98-1.44 35.18-1.44 35.18S52.2 46.05 30.03 44.85A38.6 38.6 0 0 0 .56 57.93 63.8 63.8 0 0 1 37.56 6c8.2 1.8 22.26 7.16 27.76 23.05z" />
+                        <path fill="#ff4b42"
+                            d="M94.92 47.7c-13.48 16.63-31.2 16.36-31.2 16.36s9.92-19.2-.13-39a38.6 38.6 0 0 0-26.18-19 63.78 63.78 0 0 1 63.52 6.03c2.56 8 4.98 22.85-6.05 35.6z" />
+                        <path fill="#c063d6"
+                            d="M93.52 82.53C72.38 79.17 63.75 63.7 63.75 63.7s21.6-1.02 33.7-19.63a38.6 38.6 0 0 0 3.43-32.04 64.33 64.33 0 0 1 5.74 4.6 63.63 63.63 0 0 1 20.82 53.26c-5.62 6.2-17.34 15.8-33.94 12.6z" />
+                        <path fill="#17a4f6"
+                            d="M62.5 99c-7.65-19.98 1.44-35.17 1.44-35.17S75.56 81.6 97.74 82.8a39.1 39.1 0 0 0 29.73-13.03 63.8 63.8 0 0 1-37.16 52.3c-8.2-1.8-22.25-7.15-27.8-23.06z" />
+                        <path fill="#4fca24"
+                            d="M26.64 115.63C24 107.6 21.6 93.06 32.5 80.5c13.48-16.62 31.58-16.55 31.58-16.55s-9.6 19.06.44 38.86a38.82 38.82 0 0 0 26.05 19.17 63.78 63.78 0 0 1-63.93-6.3z" />
+                    </g>
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="64" height="64" version="1.0"
+                    viewBox="0 0 128 128">
+                    <g>
+                        <path fill="#ffcb02"
+                            d="M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z" />
+                        <path fill="#ff9e02"
+                            d="M65.32 29.05c7.65 19.98-1.44 35.18-1.44 35.18S52.2 46.05 30.03 44.85A38.6 38.6 0 0 0 .56 57.93 63.8 63.8 0 0 1 37.56 6c8.2 1.8 22.26 7.16 27.76 23.05z" />
+                        <path fill="#ff4b42"
+                            d="M94.92 47.7c-13.48 16.63-31.2 16.36-31.2 16.36s9.92-19.2-.13-39a38.6 38.6 0 0 0-26.18-19 63.78 63.78 0 0 1 63.52 6.03c2.56 8 4.98 22.85-6.05 35.6z" />
+                        <path fill="#c063d6"
+                            d="M93.52 82.53C72.38 79.17 63.75 63.7 63.75 63.7s21.6-1.02 33.7-19.63a38.6 38.6 0 0 0 3.43-32.04 64.33 64.33 0 0 1 5.74 4.6 63.63 63.63 0 0 1 20.82 53.26c-5.62 6.2-17.34 15.8-33.94 12.6z" />
+                        <path fill="#17a4f6"
+                            d="M62.5 99c-7.65-19.98 1.44-35.17 1.44-35.17S75.56 81.6 97.74 82.8a39.1 39.1 0 0 0 29.73-13.03 63.8 63.8 0 0 1-37.16 52.3c-8.2-1.8-22.25-7.15-27.8-23.06z" />
+                        <path fill="#4fca24"
+                            d="M26.64 115.63C24 107.6 21.6 93.06 32.5 80.5c13.48-16.62 31.58-16.55 31.58-16.55s-9.6 19.06.44 38.86a38.82 38.82 0 0 0 26.05 19.17 63.78 63.78 0 0 1-63.93-6.3z" />
+                    </g>
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="64" height="64" version="1.0"
+                    viewBox="0 0 128 128">
+                    <g>
+                        <path fill="#ffcb02"
+                            d="M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z" />
+                        <path fill="#ff9e02"
+                            d="M65.32 29.05c7.65 19.98-1.44 35.18-1.44 35.18S52.2 46.05 30.03 44.85A38.6 38.6 0 0 0 .56 57.93 63.8 63.8 0 0 1 37.56 6c8.2 1.8 22.26 7.16 27.76 23.05z" />
+                        <path fill="#ff4b42"
+                            d="M94.92 47.7c-13.48 16.63-31.2 16.36-31.2 16.36s9.92-19.2-.13-39a38.6 38.6 0 0 0-26.18-19 63.78 63.78 0 0 1 63.52 6.03c2.56 8 4.98 22.85-6.05 35.6z" />
+                        <path fill="#c063d6"
+                            d="M93.52 82.53C72.38 79.17 63.75 63.7 63.75 63.7s21.6-1.02 33.7-19.63a38.6 38.6 0 0 0 3.43-32.04 64.33 64.33 0 0 1 5.74 4.6 63.63 63.63 0 0 1 20.82 53.26c-5.62 6.2-17.34 15.8-33.94 12.6z" />
+                        <path fill="#17a4f6"
+                            d="M62.5 99c-7.65-19.98 1.44-35.17 1.44-35.17S75.56 81.6 97.74 82.8a39.1 39.1 0 0 0 29.73-13.03 63.8 63.8 0 0 1-37.16 52.3c-8.2-1.8-22.25-7.15-27.8-23.06z" />
+                        <path fill="#4fca24"
+                            d="M26.64 115.63C24 107.6 21.6 93.06 32.5 80.5c13.48-16.62 31.58-16.55 31.58-16.55s-9.6 19.06.44 38.86a38.82 38.82 0 0 0 26.05 19.17 63.78 63.78 0 0 1-63.93-6.3z" />
+                    </g>
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="64" height="64" version="1.0"
+                    viewBox="0 0 128 128">
+                    <g>
+                        <path fill="#ffcb02"
+                            d="M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z" />
+                        <path fill="#ff9e02"
+                            d="M65.32 29.05c7.65 19.98-1.44 35.18-1.44 35.18S52.2 46.05 30.03 44.85A38.6 38.6 0 0 0 .56 57.93 63.8 63.8 0 0 1 37.56 6c8.2 1.8 22.26 7.16 27.76 23.05z" />
+                        <path fill="#ff4b42"
+                            d="M94.92 47.7c-13.48 16.63-31.2 16.36-31.2 16.36s9.92-19.2-.13-39a38.6 38.6 0 0 0-26.18-19 63.78 63.78 0 0 1 63.52 6.03c2.56 8 4.98 22.85-6.05 35.6z" />
+                        <path fill="#c063d6"
+                            d="M93.52 82.53C72.38 79.17 63.75 63.7 63.75 63.7s21.6-1.02 33.7-19.63a38.6 38.6 0 0 0 3.43-32.04 64.33 64.33 0 0 1 5.74 4.6 63.63 63.63 0 0 1 20.82 53.26c-5.62 6.2-17.34 15.8-33.94 12.6z" />
+                        <path fill="#17a4f6"
+                            d="M62.5 99c-7.65-19.98 1.44-35.17 1.44-35.17S75.56 81.6 97.74 82.8a39.1 39.1 0 0 0 29.73-13.03 63.8 63.8 0 0 1-37.16 52.3c-8.2-1.8-22.25-7.15-27.8-23.06z" />
+                        <path fill="#4fca24"
+                            d="M26.64 115.63C24 107.6 21.6 93.06 32.5 80.5c13.48-16.62 31.58-16.55 31.58-16.55s-9.6 19.06.44 38.86a38.82 38.82 0 0 0 26.05 19.17 63.78 63.78 0 0 1-63.93-6.3z" />
+                    </g>
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="64" height="64" version="1.0"
+                    viewBox="0 0 128 128">
+                    <g>
+                        <path fill="#ffcb02"
+                            d="M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z" />
+                        <path fill="#ff9e02"
+                            d="M65.32 29.05c7.65 19.98-1.44 35.18-1.44 35.18S52.2 46.05 30.03 44.85A38.6 38.6 0 0 0 .56 57.93 63.8 63.8 0 0 1 37.56 6c8.2 1.8 22.26 7.16 27.76 23.05z" />
+                        <path fill="#ff4b42"
+                            d="M94.92 47.7c-13.48 16.63-31.2 16.36-31.2 16.36s9.92-19.2-.13-39a38.6 38.6 0 0 0-26.18-19 63.78 63.78 0 0 1 63.52 6.03c2.56 8 4.98 22.85-6.05 35.6z" />
+                        <path fill="#c063d6"
+                            d="M93.52 82.53C72.38 79.17 63.75 63.7 63.75 63.7s21.6-1.02 33.7-19.63a38.6 38.6 0 0 0 3.43-32.04 64.33 64.33 0 0 1 5.74 4.6 63.63 63.63 0 0 1 20.82 53.26c-5.62 6.2-17.34 15.8-33.94 12.6z" />
+                        <path fill="#17a4f6"
+                            d="M62.5 99c-7.65-19.98 1.44-35.17 1.44-35.17S75.56 81.6 97.74 82.8a39.1 39.1 0 0 0 29.73-13.03 63.8 63.8 0 0 1-37.16 52.3c-8.2-1.8-22.25-7.15-27.8-23.06z" />
+                        <path fill="#4fca24"
+                            d="M26.64 115.63C24 107.6 21.6 93.06 32.5 80.5c13.48-16.62 31.58-16.55 31.58-16.55s-9.6 19.06.44 38.86a38.82 38.82 0 0 0 26.05 19.17 63.78 63.78 0 0 1-63.93-6.3z" />
+                    </g>
+                </svg>
+            </div>
+            <img class="angel" src="./imgs/sea_angel.svg" alt="" width="120" height="80">
+            <img class="angel angel__reverse" src="./imgs/sea_angel2.svg" alt="" width="120" height="80">
+        </section>
+
+        <section class="sectionPin pin">
+            <div class="pin_sticky">
+                <div class="pin_wrapper">
+                    <p class="pin_text stick">
+                        おう&emsp;なつだぜ<br>
+                        おれは&emsp;げんきだぜ<br>
+                        あまり&emsp;ちかよるな<br>
+                        おれの&emsp;こころも&emsp;かまも<br>
+                        どきどきするほど<br>
+                        ひかってるぜ<br><br>
+                        おう&emsp;あついぜ<br>
+                        おれは&emsp;がんばるぜ<br>
+                        もえる&emsp;ひをあびて<br>
+                        かまを&emsp;ふりかざす&emsp;すがた<br>
+                        わくわくするほど<br>
+                        きまってるぜ<br>
+                    </p>
+                    <img class="image" src="./imgs/mantis.svg" alt="トパァス" width="300" height="300">
+                    <img class="image image__2" src="./imgs/mantis2.svg" alt="サファイア" width="300" height="300">
+                    <img class="image image__3" src="./imgs/mantis3.svg" alt="ダイアモンド" width="300" height="300">
+                    <div class="pin_wrapper">
+                        <p class="pin_text stick">&emsp;『おれはかまきり』<br>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;かまきりりゅうじ<br></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sectionRainbow">
+            <p class="scroll_right">「歴史上の偉人に生まれ変わるなら、誰になりたいですか？」<br>
+                「ジャンヌダルク！（キリッ）」<br>
+                「それはどうしてですか？」<br>
+                「誕生日が一緒だからに決まってんじゃん！（ドヤァ）」</p>
+            <p class="scroll_left">「では、動物に生まれ変わるなら、何になりたいですか？」<br>
+                「チーター！（即答）」<br>
+                「それはどうしてですか？」<br>
+                「サバンナをピューって駆け抜けたいじゃん！（ドヤァ）」</p>
+            <p class="scroll_up">「バカも休み休み<ruby>YEAH<rt>言えい</rt></ruby>」<br> </p>
+            <div class="dropGem dropGem__1 dropGem__item1 dropGem__small"></div>
+            <div class="dropGem dropGem__2 dropGem__item3"></div>
+            <div class="dropGem dropGem__3 dropGem__item2 dropGem__medium"></div>
+            <div class="dropGem dropGem__4 dropGem__item3 dropGem__small"></div>
+            <div class="dropGem dropGem__5 dropGem__item1  dropGem__medium"></div>
+        </section>
+
+        <section class="sectionSky sky">
+            <img class="sky_image" src="./imgs/wonder.webp" alt="" width="1920" height="1920">
+            <p class="sky_text">健康のためなら死んでもいい<br></p>
+        </section>
+    </div>
+
+    <nav class="navigation">
+        <ul>
+            <li><span>■</span><a href="index.html">TOP</a></li>
+            <li><span>■</span><a href="sample.html">SAMPLE</a></li>
+            <li class="navigation_currentPage"><span>■</span>SIMPLE</li>
+        </ul>
+        <div class="matrix"></div>
+    </nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        // scroll_effect
+        $(window).scroll(function () {
+            var scrollAnimationElm = document.querySelectorAll('.scroll_up , .scroll_left , .scroll_right');
+            var scrollAnimationFunc = function () {
+                for (var i = 0; i < scrollAnimationElm.length; i++) {
+                    var triggerMargin = 150;
+                    if (window.innerHeight > scrollAnimationElm[i].getBoundingClientRect().top + triggerMargin) {
+                        scrollAnimationElm[i].classList.add('on');
+                    }
+                }
+            }
+            window.addEventListener('load', scrollAnimationFunc);
+            window.addEventListener('scroll', scrollAnimationFunc);
+        });
+
+        // マトリックス
+        let m = document.getElementsByClassName('matrix');
+        let c = document.createElement('canvas');
+        let ctx = c.getContext('2d');
+        let cw = c.width = 400;
+        let ch = c.height = 58;
+        // 以下は body（末尾）に追加する（cssで位置調整することで先頭に持ってくることができる）
+        // document.body.appendChild(c);
+        // class名でやる場合 → 一致する要素のリストであり、要素自身ではないため、求める最初の要素が必要（例 [0]）
+        // id名でやる方が楽
+        m[0].appendChild(c);
+
+        ctx.font = 'normal 16px monospace';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = '#fff';
+        ctx.strokeStyle = 'rgba(0, 0, 0, .3)';
+        ctx.shadowColor = '#3f3';
+        let page = 0;
+
+        // ... multiple messages... //
+        let messagesArray = new Array(
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "This is a practice site.",
+            "It is also a place to output inputs.",
+            "Thank you for watching.",
+            "Please continue to enjoy.",
+            "██████████████████████████████████",
+            "Original Idea: ",
+            "modified by * STRUNKS *"
+        );
+
+        // ...cursor style... //
+        let cursor = new Array(
+            "",
+            "█",
+            "",
+            "█",
+            "",
+            "█",
+            "",
+            "█",
+            "_",
+            "",
+            "\n",
+            "█",
+            "* Jack Rugile and many others *",
+            "█"
+        );
+
+        let messageArray = messagesArray[page].split('');
+        let totalMessages = messagesArray.length - 1;
+        let messageLength = messageArray.length;
+        let pointer = 0;
+        let typeTick = 0;
+        let typeTickMax = 0;
+
+        let minTick = 5;
+        let maxTick = 10;
+        let typeResetTick = 0;
+        let typeResetMax = 15;
+
+        let updateTypeTick = function () {
+
+            if (pointer < messageLength) {
+                if (typeTick < typeTickMax) {
+                    typeTick++;
+                } else {
+                    typeTick = 0;
+                    pointer++;
+                    typeTickMax = Math.floor((Math.random() * maxTick) + minTick);;
+                }
+            } else {
+                if (typeResetTick < typeResetMax) {
+                    typeResetTick++;
+                } else {
+                    typeResetTick = 0;
+                    typeTick = 0;
+                    pointer = 0;
+
+                    // ...change message... //      
+                    if (page < totalMessages) page++;
+                    else page = 0;
+
+                    messageArray = messagesArray[page].split('');
+                    messageLength = messageArray.length;
+                }
+            }
+        }
+
+        let renderMessage = function () {
+            let text;
+            switch (cursor[page]) {
+                case "\n":   // ... NO ANIMATION
+                    text = messageArray.slice(0, messageLength);
+                    break;
+                default:
+                    text = messageArray.slice(0, pointer);
+                    text[pointer] = cursor[page];
+                    break;
+            }
+            ctx.shadowBlur = 9;
+            ctx.fillText(text.join(''), 20, 20);
+            ctx.shadowBlur = 0;
+        }
+
+        let renderLines = function () {
+            ctx.beginPath();
+            for (let i = 0; i < ch / 2; i += 1) {
+                ctx.moveTo(0, (i * 2) + .5);
+                ctx.lineTo(cw, (i * 2) + .5);
+            }
+            ctx.stroke();
+        }
+
+        let loop = function () {
+            ctx.clearRect(0, 0, cw, ch);
+            updateTypeTick();
+            renderMessage();
+            renderLines();
+            setTimeout(loop, 2);
+        }
+        loop();
+    </script>
+</body>
+
+
+<!-----------------------------------------------
+
+                                       +++++++++
+                                       +++++++++
+                  \\\\\\\\\\\\\\\      +++++++++
+                  \\\\\\\\\\\\\\\      +++++++++
+               \\\\\\\\\\\\\\\\\\\\\\\\\\\++++++
+               \\\\\\\\\\\\\\\\\\\\\\\\\\\++++++
+               #########++++++###+++   #########
+               #########++++++###+++   #########
+            ###+++###+++++++++###++++++#########
+            ###+++###+++++++++###++++++#########
+            ###+++######+++++++++###+++++++++###
+            ###+++######+++++++++###+++++++++###
+            ######++++++++++++###############
+            ######++++++++++++###############
+                  +++++++++++++++++++++###
+                  +++++++++++++++++++++###
+      ###############\\\#########\\\###
+      ###############\\\#########\\\###
+   #####################\\\#########\\\      ###
+   #####################\\\#########\\\      ###
+++++++##################\\\\\\\\\\\\\\\      ###
+++++++##################\\\\\\\\\\\\\\\      ###
++++++++++   \\\\\\###\\\\\\+++\\\\\\+++\\\######
++++++++++   \\\\\\###\\\\\\+++\\\\\\+++\\\######
+   +++   ###\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\######
+   +++   ###\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\######
+      #########\\\\\\\\\\\\\\\\\\\\\\\\\\\######
+      #########\\\\\\\\\\\\\\\\\\\\\\\\\\\######
+   #########\\\\\\\\\\\\\\\\\\\\\
+   #########\\\\\\\\\\\\\\\\\\\\\
+   ###      \\\\\\\\\\\\
+   ###      \\\\\\\\\\\\
+
+-------------------------------------------------->
+
+</html>

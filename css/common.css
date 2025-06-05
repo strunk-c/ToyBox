@@ -1,0 +1,475 @@
+@charset "utf-8";
+
+/*----------------------------------
+
+setup
+
+----------------------------------*/
+:root {
+  --main-color: #252550;
+}
+
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--main-color);
+  height: 100%;
+  text-align: left;
+  color: #fff;
+  font-size: 100%;
+  font-weight: 400;
+  font-family: "Kumbh Sans", "游ゴシック体", "Yu Gothic", YuGothic, "メイリオ",
+    Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  -webkit-text-size-adjust: 100%;
+  animation: bodyFadeIn 3s ease 0s 1 normal;
+  cursor: none;
+}
+
+* {
+  cursor: none !important;
+}
+
+#cursor {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 1);
+  width: 44px;
+  height: 44px;
+  border-radius: 40px;
+  z-index: 10000;
+  pointer-events: none;
+  transition: transform 0.3s;
+  opacity: 0;
+  transform: scale(0.2);
+  margin: -22px 0 0 -22px;
+  /*ポインタズレ修正*/
+}
+
+#cursor.openMenu {
+  background-color: rgba(76, 83, 81, 1);
+}
+
+#cursor.mouse_active {
+  transform: scale(1);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#cursor.openMenu.mouse_active {
+  background-color: rgba(76, 83, 81, 0.5);
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+a:hover,
+.menu-trigger:hover {
+  transform: translateY(-3px);
+}
+
+::-moz-selection {
+  background: var(--main-color);
+  color: #fff;
+}
+
+::selection {
+  background: var(--main-color);
+  color: #fff;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.pc {
+  display: block !important;
+}
+
+.sp {
+  display: none !important;
+}
+
+.read {
+  line-height: 2;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+@media screen and (max-width: 768px) {
+
+  a:hover,
+  .menu-trigger:hover {
+    transform: none;
+  }
+
+  .pc {
+    display: none !important;
+  }
+
+  .sp {
+    display: block !important;
+  }
+}
+
+/*----------------------------------
+
+@keyframes
+
+----------------------------------*/
+@keyframes bodyFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/*----------------------------------
+
+header
+
+----------------------------------*/
+header.global {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+header.global .wrap {
+  padding: 0 40px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+header.global h1 {
+  width: 110px;
+  margin-top: 30px;
+}
+
+header.global ul {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+}
+
+.iziModal {
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.iziModal.appear {
+  display: block !important;
+  transition: margin-top 0.3s ease, height 0.3s ease;
+  transform: translateZ(0);
+  position: fixed !important;
+  z-index: 9999;
+  height: 100vh;
+}
+
+.iziModal.appear .inner {
+  background: #fff;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.3s;
+}
+
+.iziModal.appear .inner a {
+  color: var(--main-color);
+  font-size: 8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.iziModal.appear .menu {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-trigger {
+  position: absolute;
+  top: 0px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  z-index: 10009;
+  cursor: pointer;
+  margin-top: 30px;
+  border: solid 2px #fff;
+  border-radius: 60px;
+}
+
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.menu-trigger span {
+  position: absolute;
+  left: 16px;
+  width: 24px;
+  height: 2px;
+  background-color: #fff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.menu-trigger span:nth-of-type(1) {
+  top: 23px;
+}
+
+.menu-trigger span:nth-of-type(2) {
+  top: 28px;
+  display: none;
+}
+
+.menu-trigger span:nth-of-type(3) {
+  bottom: 23px;
+}
+
+.menu-trigger.active {
+  border: solid 2px var(--main-color);
+}
+
+.menu-trigger.active span:nth-of-type(1) {
+  transform: translateY(4.5px) rotate(-45deg);
+  background-color: var(--main-color);
+}
+
+.menu-trigger.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.menu-trigger.active span:nth-of-type(3) {
+  transform: translateY(-4.5px) rotate(45deg);
+  background-color: var(--main-color);
+}
+
+header.global ul {
+  display: block;
+}
+
+header.global .menu a::after {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+header.global .menu .current a::after {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  header.global .wrap {
+    padding: 0 20px;
+  }
+
+  header.global h1 {
+    width: 80px;
+    margin-top: 20px;
+  }
+
+  .menu-trigger {
+    right: 20px;
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .iziModal.appear,
+  .iziModal.appear .inner {
+    height: 100%;
+  }
+
+  .iziModal.appear .inner a {
+    font-size: 10vw;
+  }
+
+  .iziModal.appear .menu li {
+    margin-top: 5px;
+  }
+
+  .menu-trigger span {
+    left: 13px;
+    width: 20px;
+    height: 2px;
+  }
+
+  .menu-trigger span:nth-of-type(1) {
+    top: 18px;
+  }
+
+  .menu-trigger span:nth-of-type(3) {
+    bottom: 18px;
+  }
+
+  .menu-trigger.active span:nth-of-type(3) {
+    transform: translateY(-4px) rotate(45deg);
+  }
+
+  .menu-trigger.active span:nth-of-type(1) {
+    transform: translateY(4px) rotate(-45deg);
+  }
+}
+
+/*----------------------------------
+
+footer
+
+----------------------------------*/
+footer {
+  z-index: 9998;
+  text-align: right;
+  padding: 0 40px 30px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    padding: 0 20px 20px;
+  }
+}
+
+/*----------------------------------
+
+2nd common
+
+----------------------------------*/
+main.second {
+  font-size: 1.4rem;
+  display: block !important;
+  /* ie11 */
+  position: relative;
+  z-index: 9998;
+  margin-bottom: 100px;
+}
+
+main.second>h2 {
+  font-size: 5.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  position: fixed;
+  right: 40px;
+  top: 120px;
+}
+
+.contents {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 220px 40px 0;
+}
+
+.note {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  main.second {
+    font-size: 1.2rem;
+    margin-bottom: 80px;
+  }
+
+  main.second>h2 {
+    font-size: 3.6rem;
+    top: 90px;
+    right: 20px;
+  }
+
+  .contents {
+    padding: 170px 20px 0;
+  }
+
+  .note {
+    font-size: 1rem;
+  }
+}
+
+/*----------------------------------
+
+tab Area
+
+----------------------------------*/
+.tabWrap>input[type="radio"] {
+  display: none;
+}
+
+.tabArea {
+  margin-bottom: 50px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
+
+.tabArea label {
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 0.16em;
+  padding-bottom: 8px;
+  margin-right: 40px;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.tabArea label:hover {
+  transform: translateY(-3px);
+}
+
+.tabpanel {
+  width: 100%;
+  display: none;
+}
+
+#tab1:checked~.tabArea .tab1_label,
+#tab2:checked~.tabArea .tab2_label {
+  position: relative;
+  border-bottom: solid 2px #fff;
+}
+
+#tab1:checked~.panel #panel1,
+#tab2:checked~.panel #panel2 {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .tabArea {
+    margin-bottom: 30px;
+  }
+
+  .tabArea label {
+    margin-right: 20px;
+    padding-bottom: 5px;
+    font-size: 1.4rem;
+  }
+
+  .tabArea label:hover {
+    transform: none;
+  }
+}

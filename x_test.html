@@ -1,0 +1,88 @@
+<!-- <!DOCTYPE html>
+<html lang="ja">
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: .2em;
+        border: 1px solid #000;
+        text-align: left;
+    }
+</style>
+
+<body>
+    <h2>Network Information API</h2>
+    <p>navigator.connection 対応ブラウザで閲覧してください。（<a href="https://caniuse.com/#feat=netinfo">Can I use...</a>）</p>
+    <p id="ts"></p>
+    <table>
+        <tbody>
+            <tr>
+                <th>type</th>
+                <td id="type"></td>
+            </tr>
+            <tr>
+                <th>effectiveType</th>
+                <td id="effectiveType"></td>
+            </tr>
+            <tr>
+                <th>downlink</th>
+                <td id="downlink"></td>
+            </tr>
+            <tr>
+                <th>downlinkMax</th>
+                <td id="downlinkMax"></td>
+            </tr>
+            <tr>
+                <th>rtt</th>
+                <td id="rtt"></td>
+            </tr>
+            <tr>
+                <th>saveData</th>
+                <td id="saveData"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+<script>
+    // console.log(navigator.connection.type);
+    const connection = navigator.connection;
+
+    if (navigator.onLine) {
+        console.log("online");
+    } else {
+        console.log("offline");
+    }
+
+    const ts = document.getElementById('ts');
+    if (connection) {
+        if (connection.effectiveType === "slow-2g") {
+            ts.textContent = "slow-2g";
+        } else {
+            ts.textContent = textContent = connection.effectiveType;
+        }
+    }
+
+    if (connection !== undefined) {
+        const init = function () {
+            document.getElementById('type').textContent = connection.type;
+            document.getElementById('effectiveType').textContent = connection.effectiveType;
+            document.getElementById('downlink').textContent = connection.downlink + ' Mb/s';
+            document.getElementById('downlinkMax').textContent = connection.downlinkMax + ' Mb/s';
+            document.getElementById('rtt').textContent = connection.rtt + ' ms';
+            document.getElementById('saveData').textContent = connection.saveData;
+        };
+        init();
+
+        if ('onchange' in connection) {
+            connection.addEventListener('change', init);
+        } else if ('ontypechange' in connection) {
+            connection.addEventListener('typechange', init);
+        }
+    }
+</script>
+
+</html> -->

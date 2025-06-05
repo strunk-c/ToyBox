@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>カッパーク</title>
+    <link rel="icon" href="image/logoIcon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="適当な遊び場です。">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.4/vegas.min.css">
+    <link rel="stylesheet" href="css/park.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+</head>
+
+<body class="home">
+
+    <div id="mainImg">
+        <div id="mainImg-inner">
+            <div id="cur">
+                <a href="memory.html">ぴえんすいじゃくを<span class="cur"><i class="fas fa-poo"></i>プレイ</span></a>
+            </div>
+            <div id="cur2">
+                <a href="tmkStory.html">たまこものがたりを<span class="cur"><i class="fas fa-poop"></i>プレイ</span></a>
+            </div>
+        </div>
+        <div class="scroll">
+            <img src="./image/scroll.gif" alt="">
+        </div>
+    </div>
+
+    <div id="container">
+        <header>
+            <h1 id="logo">
+                <a href="park.html"><img src=" ./image/logoIcon.png" alt=""></a>
+            </h1>
+            <nav id="menubar">
+                <ul>
+                    <li><a href="">TOP<span>とっぷぺーじ</span></a>
+                        <ul>
+                            <li><a href="index.html">とっぷにもどる</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">ETC<span>そのたいろいろ</span></a>
+                        <ul>
+                            <li><a href="salon.html">さろんさいと</a></li>
+                            <li><a href="demo.html">ほらーさいと</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">TMK<span>たまこのおうち</span></a>
+                        <ul>
+                            <li><a href="tmkRoom.html">たまこのへや</a></li>
+                            <li><a href="fraud.html">たまこのおしいれ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">DEV<span>かいはつちゅう</span></a>
+                        <ul>
+                            <li><a href="" disabled>たっぷのたつじん</a></li>
+                            <li><a href="" disabled>？？？</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <img src="./image/kappa.png" alt="" id="defaultImage">
+        <img src="./img/blood2.jpg" alt="" id="specialImage">
+
+
+        <footer>
+            <small>&copy; <a href="index.html"> 2025 STRUNKS</a></small>
+            <!-- <span class="pr"><a href="https://www.deepl.com/ja/translator" target="_blank">《DeepL》</a></span> -->
+        </footer>
+    </div>
+
+    <!--jQueryの読み込み-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--スライドショー（vegas）-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.4/vegas.min.js"></script>
+    <script src="js/vegas.js"></script>
+    <!--job4用のスクリプト-->
+    <script src="js/park.js"></script>
+    <!--ハンバーガーボタン（開閉操作のボタン）-->
+    <div id="menubar_hdr"></div>
+    <!--ページの上部へ戻るボタン-->
+    <div class="pageTop">
+        <a href="#"><i class="fa-solid fa-hand-pointer"></i></a>
+        <!-- <a href="#">∧</a> -->
+    </div>
+</body>
+
+</html>
