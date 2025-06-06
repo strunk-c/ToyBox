@@ -27,8 +27,8 @@
 
 ## その他
 
-プログラミングを学び始めて最初に作ったものは [インテックスヘアー（美容室サイト）](https://strunk-c.github.io/ToyBox/salon.html) です。<br>
-[ぴえんすいじゃく](https://strunk-c.github.io/ToyBox/memory.html) や [玉子物語](https://strunk-c.github.io/ToyBox/tmkStory.html) は ゲームで、そのほかにもあります。<br>
+プログラミングを学び始めて最初に制作したものは [インテックスヘアー（美容室サイト）](https://strunk-c.github.io/ToyBox/salon.html) です。<br>
+そのほか友人からのリクエストに応えて作ったゲームなど、多種多様な内容となっています。<br>
 もしよろしければ見ていただけますと幸いです。
 
 <br>
