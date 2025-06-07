@@ -636,12 +636,20 @@ span:nth-child(7) {
     }
 
     #textArea {
+        width: 65%;
+        height: 40%;
+        top: 56%;
+        padding-left: 10px;
+        padding-right: 70px;
+    }
+    
+/*     #textArea {
         width: 65vw;
         height: 40vh;
         top: 480px;
         padding-left: 10px;
         padding-right: 70px;
-    }
+    } */
 
     #textBox {
         width: 75vw;
