@@ -476,8 +476,8 @@ span:nth-child(7) {
     font-size: larger;
 }
 
-@media screen and (max-width: 1024px) {
-    /* 1024pxまでの幅の場合に適用される */
+@media screen and (max-width: 1023px) {
+    /* 1023px以下の画面でのスタイル */
 
     #screen {
         width: 100vw;
@@ -580,8 +580,8 @@ span:nth-child(7) {
     }
 }
 
-@media screen and (max-width: 768px) {
-    /* 768pxまでの幅の場合に適用される */
+@media screen and (max-width: 767px) {
+    /* 767px以下の画面でのスタイル */
 
     #screen {
         width: 100vw;
@@ -591,7 +591,7 @@ span:nth-child(7) {
 
     #titleText,
     #titleClick {
-        padding: 120px 0;
+        padding: 80px 0;
     }
 
     .itemBox {
@@ -637,13 +637,13 @@ span:nth-child(7) {
 
     #textArea {
         width: 65%;
-        height: 40%;
         top: 56%;
+        height: 40%;
         padding-left: 10px;
         padding-right: 70px;
     }
-    
-/*     #textArea {
+
+    /* #textArea {
         width: 65vw;
         height: 40vh;
         top: 480px;
@@ -663,9 +663,8 @@ span:nth-child(7) {
     }
 
     .select {
-
-        width: 70vw;
-        height: 10vh;
+        width: 70%;
+        height: 10%;
     }
 
     #select1 {
@@ -681,7 +680,7 @@ span:nth-child(7) {
     }
 
     .selectText {
-        line-height: 95px;
+        line-height: 88px;
         font-size: 1.4rem;
     }
 }
